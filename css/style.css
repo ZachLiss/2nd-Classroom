@@ -1,0 +1,148 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	background-color:#4B98B2;
+	-moz-background-color:#4B98B2;
+}
+
+h1 {
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+   	font-size: 50px;
+	letter-spacing:3px;
+	text-shadow: 3px 1px 5px black;
+	-webkit-text-fill-color: #d5ffe6; /* Will override color (regardless of order) */
+   	-webkit-text-stroke-width: 1.5px;
+   	-webkit-text-stroke-color: black;
+	margin-top: 0px;
+}
+
+h2 {
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+   	font-size: 20px;
+
+	letter-spacing:1px;
+	text-shadow: 2px 1px 5px black;
+	-webkit-text-fill-color: #d5ffe6; /* Will override color (regardless of order) */
+   	-webkit-text-stroke-width: 1.5px;
+   	-webkit-text-stroke-color: black;
+}
+
+#header-container {
+	position:absolute;
+	top:0px;
+	left:1%;
+	width:98%;
+	height:60px;
+	background-color:#50C878;
+
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	-moz-border-bottom-left-radius: 15px;
+	-moz-border-bottom-right-radius: 15px;
+
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	box-shadow: 5px 5px 5px black;
+}
+
+#logo{
+	position:relative;
+
+	left:1%;
+	padding-top:0px;
+}
+
+
+#notifications{
+	position:absolute;
+	top: 10px;
+	right:1%;
+	padding-top:0px;
+}
+#panel{
+	position:absolute;
+	top: 60px;
+	right:15%;
+	padding:60px;
+	display:none;
+	right:1%;
+	background-color:#50C878;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	-moz-box-shadow: 5px 5px 5px black;
+	-webkit-box-shadow: 5px 5px 5px black;
+	box-shadow: 5px 5px 5px black;
+}
+
+#search_container {
+
+	position:relative;
+	top:2%;
+	left:1%;
+	width:35%;
+	height:80%;
+	background-color:#50C878;
+
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+
+	-moz-box-shadow: inset 0 0 5px #888;
+	-webkit-box-shadow: 0 0 2px 2px black;
+	box-shadow: 0 0 2px 2px black;
+
+}
+
+button[type="submit"]{
+size:100%;
+}
+input[type="text"], textarea, input[type="password"] {
+
+  background-color : #d5ffe6; 
+
+}
+ 
+		
+p {
+	font-family: 'Vollkorn', Georgia, Times, serif;
+    	font-size: 18px;
+	line-height: 25px;
+	color:black;
+}
+h3, ul {
+	font-family: 'Vollkorn', Georgia, Times, serif;
+    	font-size: 16px;
+	line-height: 25px;
+	color:white;
+}
+
+table{
+	width:35%;
+
+	background-color:#d5ffe6;
+	
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	-moz-border-bottom-left-radius: 15px;
+	-moz-border-bottom-right-radius: 15px;
+
+	border: 2px solid black;
+}
+
+caption{
+	background-color:black;
+	height:60px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	-moz-border-top-left-radius: 15px;
+	-moz-border-top-right-radius: 15px;
+	border: 2px solid black;
+}
+
+#search_table{
+	position:relative;
+	top:10px;
+	width:96%;
+	height:82%;
+}
+
+#search_cap{height:30px;}
