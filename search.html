@@ -1,0 +1,40 @@
+<html>
+<head>
+	<script type="text/javascript">
+	function searchResults(str) {
+		console.log("getresults.php?q="+str);
+		var xmlhttp;
+		if(str.length == 0) {
+			document.getElementById("results").innerHTML="";
+			return;
+		}
+		if(window.XMLHttpRequest) {
+			xmlhttp=new XMLHttpRequest();
+		} else {
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+		xmlhttp.onreadystatechange=function() {
+  			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+    			document.getElementById("results").innerHTML=xmlhttp.responseText;
+    		}
+  		}
+
+		xmlhttp.open("GET", "getresults.php?q="+str, true);
+		xmlhttp.send();
+	}
+
+	</script>
+</head>
+
+<body>
+<h3>Search</h3>
+<form action="">
+	Enter Search: <input type="text" id="search_txt" onkeyup="searchResults(this.value)"/>
+</form>
+<h5>Results</h5>
+<span id="results"></span>
+<span id="t"></span>
+
+</body>
+</html>
