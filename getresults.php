@@ -7,38 +7,44 @@ if(mysqli_connect_errno($con)) {
 	//echo "Failed to connect to MySQL: " . mysqli_connect_error();
 } else {
 
-	// $content = mysqli_query($con, "SELECT * FROM USERS");
-	// while($row = mysqli_fetch_array($content)) {
-	// //	echo "$row[username] --> $row[first_name] $row[last_name] <br>";
-	// }
-
-	// $username = 'zll1';
-	// $password = 'zach1';
-
 	$q = $_GET["q"];
 	$qlen = strlen($q);
 
-	//echo "SELECT * FROM COURSES WHERE course_num LIKE '%$q%'<br>";
-
 	//search for results in db
 	if($qlen > 0) {
-		$results = "";
 
-		$content = mysqli_query($con, "SELECT * FROM COURSES WHERE course_num LIKE '%$q%'");
+		//get results form COURSES
+		$content = mysqli_query($con, "SELECT * 
+									   FROM COURSES 
+									   WHERE course_num LIKE '%$q%' OR course_name LIKE '%$q%'");
 
-		if(!$content) echo "bad query";
 
-		while($row = mysqli_fetch_array($content)) {
-		//	echo "Logging $row[first_name] $row[last_name] in<br>";
-			//$results += "$row[course_num] $row[course_name] <br>";
-			echo "$row[course_num] $row[course_name] <br>";
+		if(!$content) {
+			echo "bad query";
+		} else if(mysqli_num_rows($content) > 0) {
+			echo "<h3>Courses:</h3>";
+			while($row = mysqli_fetch_array($content)) {
+				echo "<p>$row[course_num] $row[course_name]</p>";
+			}
 		}
-		//echo "<hr>";
-		//echo $results;
+
+		//get results from USERS
+		$content = mysqli_query($con, "SELECT *
+									   FROM USERS
+									   WHERE first_name LIKE '%$q%' 
+									   OR last_name LIKE '%$q%'
+									   OR concat(first_name, ' ', last_name) LIKE '%$q%'");
+
+		if(!$content) {
+			echo "bad query";
+		} else if(mysqli_num_rows($content) > 0) {
+			echo "<h3>Users:</h3>";
+			while($row = mysqli_fetch_array($content)) {
+				echo "<p>$row[first_name] $row[last_name]</p>";
+			}
+		}
 
 	}
-
-	
 }
 
 ?>
