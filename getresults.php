@@ -8,6 +8,7 @@ if(mysqli_connect_errno($con)) {
 } else {
 
 	$q = $_GET["q"];
+	$username = $_GET["username"];
 	$qlen = strlen($q);
 
 	//search for results in db
@@ -23,9 +24,31 @@ if(mysqli_connect_errno($con)) {
 			echo "bad query";
 		} else if(mysqli_num_rows($content) > 0) {
 			echo "<h3>Courses:</h3>";
+			echo "<table>";
 			while($row = mysqli_fetch_array($content)) {
-				echo "<p>$row[course_num] $row[course_name]</p>";
+				$c1 = mysqli_query($con, "SELECT *
+										  FROM COURSES_TAKEN
+										  WHERE username='$username' AND course_id=$row[course_id]");
+				
+				$num_rows = mysqli_num_rows($c1);
+
+				echo "<tr>";
+				if($num_rows == 0) {
+					//student not taking the course
+					echo "<td>$row[course_num]</td>";
+					echo "<td>$row[course_name]</td>";
+					echo "<td><button class=\"join_course\" value=\"$row[course_id]\">Join Course</button></td>";
+
+				} else {
+					//student is taking the course
+					echo "<td>$row[course_num]</td>";
+					echo "<td>$row[course_name]</td>";
+					echo "<td><button class=\"view_course\" value=\"$row[course_id]\">View Course</button></td>";
+				}
+				echo "</tr>";
+				
 			}
+			echo "</table>";
 		}
 
 		//get results from USERS
@@ -39,9 +62,15 @@ if(mysqli_connect_errno($con)) {
 			echo "bad query";
 		} else if(mysqli_num_rows($content) > 0) {
 			echo "<h3>Users:</h3>";
+			echo "<table>";
 			while($row = mysqli_fetch_array($content)) {
-				echo "<p>$row[first_name] $row[last_name]</p>";
+				echo "<tr>";
+				echo "<td>$row[first_name] $row[last_name]</td>";
+				echo "<td>$row[email]</td>";
+				echo "<td><button class=\"view_user\" value=\"$row[username]\">View User</button></td>";
+				echo "</tr>";
 			}
+			echo "</table>";
 		}
 
 	}
