@@ -1,8 +1,8 @@
 <?php
 function get_user( $username ) {
 
-	$db = new mysqli("localhost", "SavitC", "icy-gut", "2ndclassroom") or die("Oooops");
-	$result= $db->query("SELECT * FROM users WHERE users.username='$username'");
+	$db = new mysqli("localhost", "SavitC", "icy-gut", "SavitC") or die("Oooops");
+	$result= $db->query("SELECT * FROM USERS WHERE USERS.username='$username'");
 	if (!$result) {
    		print "Error - the query could not be executed";
 		$error = $db->error;
@@ -26,8 +26,8 @@ function get_user( $username ) {
 
 function sign_up ( $first_name, $last_name, $email, $username, $password){
 
-	$db = new mysqli("localhost", "SavitC", "icy-gut", "2ndclassroom") or die("Oooops");
-	$result= $db->query("SELECT * FROM users WHERE users.username='$username' or users.email='$email'");
+	$db = new mysqli("localhost", "SavitC", "icy-gut", "SavitC") or die("Oooops");
+	$result= $db->query("SELECT * FROM USERS WHERE USERS.username='$username' or USERS.email='$email'");
 	if (!$result) {
    		print "Error - the query could not be executed";
 		$error = $db->error;
@@ -36,7 +36,7 @@ function sign_up ( $first_name, $last_name, $email, $username, $password){
 	}
 	$num_rows = $result->num_rows;
 	if($num_rows == 0){ // if no rows, then there is no user with that username or email, so insert.
-		$result = $db->query("INSERT into users VALUES('$first_name', '$last_name', '$username', '$email', '$password')");
+		$result = $db->query("INSERT into USERS VALUES('$first_name', '$last_name', '$username', '$email', '$password')");
 		if (!$result) {
    			print "Error - the query could not be executed";
 			$error = $db->error;
@@ -58,8 +58,8 @@ function sign_up ( $first_name, $last_name, $email, $username, $password){
 }
 
 function search_courses( $search_val ) {
-	$db = new mysqli("localhost", "SavitC", "icy-gut", "2ndclassroom") or die("Oooops");
-	$result= $db->query("SELECT course_name FROM courses WHERE courses.course_num='$search_val'");
+	$db = new mysqli("localhost", "SavitC", "icy-gut", "SavitC") or die("Oooops");
+	$result= $db->query("SELECT course_name FROM COURSES WHERE COURSES.course_num='$search_val'");
 	if (!$result) {
    		print "Error - the query could not be executed";
 		$error = $db->error;
