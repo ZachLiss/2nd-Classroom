@@ -1,6 +1,6 @@
 <?php
 // create connection
-$con = mysqli_connect("localhost", "root", "root", "2nd_classroom_db");
+$con = mysqli_connect("localhost", "admin", "admin", "2nd_classroom_db");
 
 //check connection
 if(mysqli_connect_errno($con)) {
@@ -8,7 +8,7 @@ if(mysqli_connect_errno($con)) {
 } else {
 
 	$username = $_GET["username"];
-	$course_id = $_GET["course_id"];
+	$course_id = $_GET["cid"];
 
 	echo "username: $username <br>";
 	echo "course_id: $course_id <br>";

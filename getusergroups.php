@@ -34,5 +34,5 @@ if(mysqli_connect_errno($con)) {
 		echo json_encode($result);
 	}
 }
-
+/// group_id group_name course_id creator location time
 ?>

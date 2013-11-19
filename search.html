@@ -2,49 +2,7 @@
 <head>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="init.js"></script>
-	<script>
-	$(document).ready(function(){
-		localStorage["username"] = "zll1";
-
-		setListeners();
-
-  		$("#search_txt").keyup(function() {
-  			$.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
-  				$("#results").html(data);
-  				setListeners();
-  			});
-  		});
-
-  		$("#testspan").html("<p>i added this in the function</p>");
-	});
-
-	function setListeners() {
-		$(".join_course").click(function() {
-  			//console.log("course_id: "+$(this).val());
-  			joinCourse($(this).val());
-  		});
-
-  		$(".view_course").click(function() {
-  			viewCourse($(this).val());
-  		});
-
-  		$(".view_user").click(function() {
-  			viewUser($(this).val());
-  		});
-	}
-
-	function joinCourse(cid) {
-		console.log("joining course cid: "+cid);
-	}
-
-	function viewCourse(cid) {
-		console.log("viewing course cid: "+cid);
-	}
-
-	function viewUser(username) {
-		console.log("viewing user username: "+username);
-	}
-	</script>
+	
 </head>
 
 <body>
@@ -53,6 +11,16 @@
 	<input type="text" id="search_txt"/>
 <h5>Results</h5>
 <span id="results"></span>
-<span id="testspan"></span>
+
+<!-- Course Page -->
+<span id="titlespan"></span>
+<span id="groupspan"></span>
+<span id="userspan"></span>
+
+<!-- Group Page -->
+<span id="gtitlespan"></span>
+<span id="guserspan"></span>
+
+<!-- User Page -->
 </body>
 </html>

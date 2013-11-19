@@ -1,6 +1,6 @@
 <?php
 // create connection
-$con = mysqli_connect("localhost", "root", "root", "2nd_classroom_db");
+$con = mysqli_connect("localhost", "admin", "admin", "2nd_classroom_db");
 
 //check connection
 if(mysqli_connect_errno($con)) {

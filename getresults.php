@@ -1,6 +1,6 @@
 <?php
 // create connection
-$con = mysqli_connect("localhost", "root", "root", "2nd_classroom_db");
+$con = mysqli_connect("localhost", "admin", "admin", "2nd_classroom_db");
 
 //check connection
 if(mysqli_connect_errno($con)) {
@@ -38,7 +38,6 @@ if(mysqli_connect_errno($con)) {
 					echo "<td>$row[course_num]</td>";
 					echo "<td>$row[course_name]</td>";
 					echo "<td><button class=\"join_course\" value=\"$row[course_id]\">Join Course</button></td>";
-
 				} else {
 					//student is taking the course
 					echo "<td>$row[course_num]</td>";

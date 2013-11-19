@@ -8,12 +8,12 @@ if(mysqli_connect_errno($con)) {
 } else {
 
 	//get username and initialize a new empty array to return
-	$cid = $_GET["cid"];
+	$gid = $_GET["gid"];
 	
 	//grab the courses that $username is taking
-	$content = mysqli_query($con, "SELECT * 
-								   FROM COURSES
-								   WHERE course_id = $cid");
+	$content = mysqli_query($con, "SELECT c.course_num, c.course_name, g.creator, g.location, g.time, g.group_name
+								   FROM GROUPS g JOIN COURSES c ON g.course_id = c.course_id
+								   WHERE group_id = $gid");
 
 	
 	if(!$content) {
@@ -23,15 +23,16 @@ if(mysqli_connect_errno($con)) {
 		$row = mysqli_fetch_array($content);
 
 		//createa array for this course
-		$result = array('course_num' => $row["course_num"], 
-						'course_name' => $row["course_name"], 
-						'instructor' => $row["instructor"], 
-						'location' => $row["location"], 
-						'time' => $row["time"]);
+		$result = array('group_name' => $row["group_name"], 
+						'course_num' => $row["course_num"],
+		 				'course_name' => $row["course_name"],
+		 				'creator' => $row["creator"], 
+		 				'location' => $row["location"], 
+		 				'time' => $row["time"]);
 			
 		//encode the array in javascript format
 		echo json_encode($result);
 	}
 }
-
+// group_name course_num course_name creator location time
 ?>
