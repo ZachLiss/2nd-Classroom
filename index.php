@@ -5,9 +5,9 @@ session_start();
 <html>
 <head>
 	<title>2ndClassroom</title>
-	<link href="http://fonts.googleapis.com/css?family=Ubuntu:bold" rel="stylesheet" type="text/css">
-	<link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="css/style.css"  type="text/css">
+	<link href="css/kickstart.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="style.css"  type="text/css">
+
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
 	</script>
 	<script> 
@@ -24,7 +24,7 @@ session_start();
 <?php include 'header.php'; ?>
 
 <?php
-	if(isset($_SESSION['maker'])){
+	if(isset($_SESSION['password'])){
 		header( 'Location: home.php' );
 	}
 ?>
@@ -36,19 +36,23 @@ session_start();
 </br>
 </br>
 	<center>
+<div class="container">
 	<table id="login_table" border="0">
-	<caption><h1>Sign-In</h1></caption>
-	<tr><td align="right"><p>Username:</p></td><td align="left"><input type="text" name="username" size="20"></td><td></td></tr>
-	<tr><td align="right"><p>Password:</p></td><td align="left"><input type="password" name="password" size="20"></td><td><button type="submit" name="signin_submit">Sign In</button></td></tr>
-	<tr align="left"><td></td><td></td><td><button type="submit" name="forgot_password">Forgot Password?</button></td></tr>
-	<tr align="left"><td></td><td></td><td><a href = "signup.php">Sign Up</a></td></tr>
+	<caption><h1>S<span>ign-</span>I<span>n</span></h1></caption>
+	<tr><td><input id="user_in" type="text" name="username" placeholder="Username" required autofocus>
+		<input id="pass_in" type="password" name="password" placeholder="Password"></td></tr>
+	<tr><td align="right">	<button class="medium green" type="submit" name="signin_submit">Sign In</button>
+				<button class="small blue" type="submit" name="forgot_password">Forgot Password?</button></td></tr>
+	<tr align="right"><td text-align="right"><a text-align="right" text-size="1em" href="signup.php">Sign Up</a></td></tr>
 	</table>
-
-
 	<?php
 	if(isset($_GET['login_error'])){
-	echo "<p>LOGIN ERROR- Incorrect email and/or password, or account does not exist.</p></br>";
+		echo "<div class='notice error'><i class='icon-remove-sign icon-large'></i> Invalid Login <a href='index.php#close' class='icon-remove'></a></div>";
 	}
+?>
+</div>
+
+	<?php
 	if(isset($_GET['forgot_error'])){
 	echo "<p>FORGOT PASSWORD ERROR- User does not exist. No email sent.</p></br>";
 	}

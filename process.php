@@ -1,3 +1,4 @@
+<script type="text/javascript" src="js/localstorage.js"></script>
 <?php
 
 
@@ -16,8 +17,8 @@ if( isset($_POST['signin_submit']) ) {
 	
 	else
 	{
-		
-		$_SESSION["first_name"] = $result->fist_name;
+		echo "set_localstorage('$result->username');";
+		$_SESSION["first_name"] = $result->first_name;
 		$_SESSION["last_name"] = $result->last_name;
 		$_SESSION["username"] = $result->username;
 		$_SESSION["password"] = $result->password;

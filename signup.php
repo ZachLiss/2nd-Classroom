@@ -7,7 +7,8 @@ session_start();
 	<title>2ndClassroom</title>
 	<link href="http://fonts.googleapis.com/css?family=Ubuntu:bold" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="css/style.css"  type="css">
+	<link rel="stylesheet" href="css/kickstart.css"  type="text/css">
+	<link rel="stylesheet" href="style.css"  type="text/css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
 	</script>
 	<script> 
@@ -36,14 +37,17 @@ session_start();
 </br>
 </br>
 	<center>
+	<div class="container">
 	<table id="login_table" border="0">
-	<caption><h1>Sign-Up</h1></caption>
-	<tr><td align="right"><p>First Name:</p></td><td align="left"><input type="text" name="first_name" size="20"></td><td></td></tr>
-	<tr><td align="right"><p>Last Name:</p></td><td align="left"><input type="text" name="last_name" size="20"></td><td></td></tr>
-	<tr><td align="right"><p>Email:</p></td><td align="left"><input type="text" name="email" size="20"></td><td></td></tr>
-	<tr><td align="right"><p>Username:</p></td><td align="left"><input type="text" name="username" size="20"></td><td></td></tr>
-	<tr><td align="right"><p>Password:</p></td><td align="left"><input type="text" name="password" size="20"></td><td><button type="submit" name="signup_submit">Sign Up</button></td></tr>
+	<caption><h1>S<span>ign-</span>U<span>p</span></h1></caption
+	<tr><td align="right"><p>First Name:</p></td><td align="left"><input type="text" name="first_name" size="20" required></td></tr>
+	<tr><td align="right"><p>Last Name:</p></td><td align="left"><input type="text" name="last_name" size="20" required></td></tr>
+	<tr><td align="right"><p>Email:</p></td><td align="left"><input type="text" name="email" size="20" required></td></tr>
+	<tr><td align="right"><p>Username:</p></td><td align="left"><input type="text" name="username" size="20" required></td></tr>
+	<tr><td align="right"><p>Password:</p></td><td align="left"><input type="text" name="password" size="20" required></td></tr>
+	<tr><td></td><td align="right"><button class="medium green" type="submit" name="signup_submit">Sign Up</button></td></tr>
 	</table>
+	</div>
 
 
 	<?php
