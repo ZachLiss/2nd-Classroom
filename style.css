@@ -246,4 +246,5 @@ background-color: #fff;
 border: 2px solid black;
 color: #000;
 z-index: 1000;
+overflow: auto;
 }

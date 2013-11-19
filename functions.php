@@ -1,7 +1,7 @@
 <?php
 function get_user( $username ) {
 
-	$db = new mysqli("localhost", "SavitC", "icy-gut", "SavitC") or die("Oooops");
+	$db = new mysqli("localhost", "admin", "admin", "2nd_classroom_db") or die("Oooops");
 	$result= $db->query("SELECT * FROM USERS WHERE USERS.username='$username'");
 	if (!$result) {
    		print "Error - the query could not be executed";
@@ -26,7 +26,7 @@ function get_user( $username ) {
 
 function sign_up ( $first_name, $last_name, $email, $username, $password){
 
-	$db = new mysqli("localhost", "SavitC", "icy-gut", "SavitC") or die("Oooops");
+	$db = new mysqli("localhost", "admin", "admin", "2nd_classroom_db") or die("Oooops");
 	$result= $db->query("SELECT * FROM USERS WHERE USERS.username='$username' or USERS.email='$email'");
 	if (!$result) {
    		print "Error - the query could not be executed";
@@ -58,7 +58,7 @@ function sign_up ( $first_name, $last_name, $email, $username, $password){
 }
 
 function search_courses( $search_val ) {
-	$db = new mysqli("localhost", "SavitC", "icy-gut", "SavitC") or die("Oooops");
+	$db = new mysqli("localhost", "admin", "admin", "2nd_classroom_db") or die("Oooops");
 	$result= $db->query("SELECT course_name FROM COURSES WHERE COURSES.course_num='$search_val'");
 	if (!$result) {
    		print "Error - the query could not be executed";

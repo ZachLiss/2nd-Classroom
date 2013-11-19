@@ -2,10 +2,14 @@
 // create connection
 <<<<<<< HEAD
 $con = mysqli_connect("localhost", "admin", "admin", "2nd_classroom_db");
+=======
+<<<<<<< HEAD
+$con = mysqli_connect("localhost", "admin", "admin", "2nd_classroom_db");
 
 =======
 $con = mysqli_connect("localhost", "SavitC", "icy-gut", "SavitC");
 >>>>>>> ae3c4dda9bb8ddf2eea30eab801c0172e2d41a38
+>>>>>>> refs/heads/master
 
 //check connection
 if(mysqli_connect_errno($con)) {

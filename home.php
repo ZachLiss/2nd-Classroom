@@ -8,13 +8,13 @@ require_once('functions.php')
 	<link rel="stylesheet" href="css/kickstart.css"  type="text/css" media="all">
 	<link rel="stylesheet" href="style.css"  type="text/css" media="all">
 	<link rel="shortcut icon" type="image/ico" href="images/icon.ico">
-	<script type="text/javascript" src="js/localstorage.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>
-        $(document).ready(function(){
-        		localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
+	<script src="header.js"></script>
+	<script>
+	$(document).ready(function(){
+	localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
                 //get the list of courses for the user
-                $.get("getcourses.php?username="+localStorage['username'], function(data, status) {
+                $.get("getusercourses.php?username="+localStorage['username'], function(data, status) {
                 		JSON.stringify(data);
                         console.log(data);
                         //parse data into an array
@@ -31,9 +31,11 @@ require_once('functions.php')
                         
                         $("#user_courses").html(courseList);
                 });
+setNavigation();
+$("#main").load("calendar.php");
 
-        });
-        </script>
+});
+	</script>
 </head>
 <body>
 
@@ -73,7 +75,6 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $_SESSION
 </div>
 
 <div id="main">
-LALALALAL
 </div>
 
 </body>
