@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Create a Course</title>
+		<meta name="author" content="Peter Lancaster" />
+
+		<script>
+			$(document).ready(function() {
+				localStorage["username"] = "pel37";
+				localStorage["class_id"] = "test";
+				$("Create_Class").onclick(function() {
+					creategroup($("creategroup.php?username=" + localSTorage[username] + "&course_id=" + localStorage[class_id] + "&group_name=" + $("#gName").val() + "&time=" + $("#time").val() + "&location=" + $("#location").val()));
+				});
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<h5>Group Name</h5>
+		<input type="text" id="gName"/>
+		<h5>Course Number</h5>
+		<input type="text" id="cNum"/>
+		<h5>Time</h5>
+		<input type="text" id="time"/>
+		<h5>Location</h5>
+		<input type="text" id="location"/>
+		<br>
+		<br>
+		<button class="Create_Class">
+			Create Group
+		</button>
+	</body>
+</html>
+
