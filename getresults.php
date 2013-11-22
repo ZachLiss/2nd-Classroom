@@ -37,12 +37,12 @@ if(mysqli_connect_errno($con)) {
 					//student not taking the course
 					echo "<td>$row[course_num]</td>";
 					echo "<td>$row[course_name]</td>";
-					echo "<td><button class=\"join_course\" value=\"$row[course_id]\">Join Course</button></td>";
+					echo "<td><button class=\"join_course small blue\" value=\"$row[course_id]\">Join Course</button></td>";
 				} else {
 					//student is taking the course
 					echo "<td>$row[course_num]</td>";
 					echo "<td>$row[course_name]</td>";
-					echo "<td><button class=\"view_course\" value=\"$row[course_id]\">View Course</button></td>";
+					echo "<td><button class=\"view_course small blue\" value=\"$row[course_id]\">View Course</button></td>";
 				}
 				echo "</tr>";
 				
@@ -66,7 +66,7 @@ if(mysqli_connect_errno($con)) {
 				echo "<tr>";
 				echo "<td>$row[first_name] $row[last_name]</td>";
 				echo "<td>$row[email]</td>";
-				echo "<td><button class=\"view_user\" value=\"$row[username]\">View User</button></td>";
+				echo "<td><button class=\"view_user small blue\" value=\"$row[username]\">View User</button></td>";
 				echo "</tr>";
 			}
 			echo "</table>";

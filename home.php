@@ -9,7 +9,8 @@ require_once('functions.php')
 	<link rel="stylesheet" href="style.css"  type="text/css" media="all">
 	<link rel="shortcut icon" type="image/ico" href="images/icon.ico">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="init.js"></script>
+	<script src="js/kickstart.js"></script>
+        <script src="init.js"></script>
 	<script src="header.js"></script>
 
 	<script>
@@ -78,7 +79,7 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $_SESSION
 ?>
 <div id="user_bar">
 		<center>
-		<img id= "photo" src="<?php echo $grav_url; ?>" alt="" /><br>
+		<span class="tooltip-bottom" title="Click to setup or edit your Gravatar image."><a href="https://en.gravatar.com/site/login"><img id= "photo" src="<?php echo $grav_url; ?>" alt="" /></a></span><br>
 		</center>
 		<div id="user_courses">
 			<table id="courses">

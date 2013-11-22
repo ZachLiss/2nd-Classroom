@@ -199,6 +199,10 @@ letter-spacing:3px;
 .container caption{background-color:black;
 width:100%;}
 
+.container i{
+color: #86dc00;
+}
+
 #user_in{
 -webkit-border-bottom-left-radius: 0px;
 border-bottom-left-radius: 0px;
@@ -268,6 +272,8 @@ overflow: auto;
 	background-color: black;
 	padding: 5;
 }
+
+#main h1 input{padding:0;}
 #main h3 {
 	font-size: 1em;
 	color: black;
@@ -280,3 +286,5 @@ overflow: auto;
 #main p {margin-top: 0px;}
 
 #main span {color:white}
+
+#mailbox td {cursor: pointer;}

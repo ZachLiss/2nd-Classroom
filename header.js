@@ -62,9 +62,8 @@ function get_messages() {
         console.log(messageArray);
         var messages = "<table id=\"mail\">"
         messageArray.forEach(function(message) {
-        	messages += "<tr id=\""+message["message_id"]+"\"><td>" + message["sender"] + "</td>";
-        	messages += "<td><a class=\"message_link\" value=\"" + message["message_id"] + "\">";
-        	messages += message["subject"] + "</a></td>";
+        	messages += "<tr class=\"message_link\" value=\"" + message["message_id"]+"\"><td>" + message["sender"] + "</td>";
+        	messages += "<td>"+message["subject"] + "</td>";
         	messages += "<td>"+ message["time"] + "</td></tr>";
     	});
     	messages+= "<tr><td><a id='new_message'>New Message</a></td></tr>"
@@ -119,7 +118,7 @@ $("#send_message").click(function(){
 }
 
 function setSearch(){
-	$("#main").html("<h1>Search</h1><input type='text' id='search_txt'/><h5>Results</h5><span id='results'></span>");
+	$("#main").html("<h1>Search   <input type='text' id='search_txt'/></h1><span id='results'></span>");
 	console.log("made it");
 	console.log($("#search_txt").attr("id"));
 	$("#search_txt").keyup(function() {
