@@ -9,7 +9,9 @@ require_once('functions.php')
 	<link rel="stylesheet" href="style.css"  type="text/css" media="all">
 	<link rel="shortcut icon" type="image/ico" href="images/icon.ico">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="init.js"></script>
 	<script src="header.js"></script>
+
 	<script>
 	$(document).ready(function(){
 	localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
@@ -24,12 +26,32 @@ require_once('functions.php')
 
                         console.log(courseArray);
                         courseArray.forEach(function(course) {
-                                courseList += "<tr><td>" + course["course_num"]+": ";
-                                courseList += course["course_name"] + "</td></tr>";
+                                courseList += "<tr><td><a class=\"view_course\" value=\""+course["course_id"]+"\">" + course["course_num"]+": ";
+                                courseList += course["course_name"] + "</a></td></tr>";
                         });
                         courseList+="</table>"
                         
                         $("#user_courses").html(courseList);
+
+                });
+
+        $.get("getusergroups.php?username="+localStorage['username'], function(data, status) {
+                		JSON.stringify(data);
+                        console.log(data);
+                        //parse data into an array
+                        var groupArray = JSON.parse(data);
+                        
+                        var groupList = "<table><caption><h1>GROUPS</h1><caption>";
+
+                        console.log(groupArray);
+                        groupArray.forEach(function(group) {
+                                groupList += "<tr><td><a class=\"view_group\" value=\""+group["group_id"]+"\">";
+                                groupList += group["group_name"] + "</a></td></tr>";
+                        });
+                        groupList+="</table>"
+                        
+                        $("#user_groups").html(groupList);
+                        setListeners();
                 });
 setNavigation();
 $("#main").load("calendar.php");
@@ -38,6 +60,7 @@ $("#main").load("calendar.php");
 	</script>
 </head>
 <body>
+
 
 
 
@@ -63,13 +86,7 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $_SESSION
 		</div>
 
 		<div id="user_groups">
-			<table>
-			<caption><h1>GROUPS</h1></caption>
-			<tr><td>
-			<ul>
-				<li>CS1520: Midterm Review</li>
-			</ul>
-			</td></tr>
+			<table id="groups">
 			</table>
 		</div>
 </div>

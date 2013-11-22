@@ -57,6 +57,9 @@ session_start();
 	if(isset($_GET['emaildup'])){
 	echo "<p>This email is already associated with an account.</p></br>";
 	}
+	if(isset($_GET['invalidemail'])){
+	echo "<p>You have entered an invalid email addtress.</p></br>";
+	}
 	?>
 	</center>
 </body>

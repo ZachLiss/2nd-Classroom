@@ -5,7 +5,7 @@ function setNavigation() {
 	});
 
 	$("#search").click(function() {
-		$("#main").load("search.html");
+		setSearch();
 	});
 
 	$("#messages").click(function() {
@@ -30,31 +30,101 @@ function setNavigation() {
 
 }
 
+/*
+	nl2br : conversion from text field newlines to <br> tags.
+	Used for message output, and eventually note output.
+*/
+
+function nl2br (str, is_xhtml) {
+  var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>';
+  return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
+
 function get_messages() {
+	/*create two new divs for mailbox view and message view*/
+	$("#main").html("<div id=\"mail_header\"></div><div id=\"mailbox\"></div><div id=\"message\"></div>");
+	/* Style */
+	$("#mailbox").height("180px");
+	$("#mailbox").css({'border-bottom': '2px solid black', 'overflow': 'auto'});
+	$("#message").css('overflow', 'auto');
+	/*Send get request to getmessages.php . This returns all field of a message table entry
+	except the 'recipient', since that is the current user, and the message itself.*/
 	$.get("getmessages.php?username="+localStorage['username'], function(data, status) {
     	JSON.stringify(data);
         console.log(data);
         //parse data into an array
         var messageArray = JSON.parse(data);
                         
-        var messages = "<table><tr><th>From:</th><th>Subject:</th><th>Time/Date</th></tr>";
-
+        var header = "<table><tr><th>From:</th><th>Subject:</th><th>Time/Date</th></tr></table>";
+        $("#mail_header").html(header);
         console.log(messageArray);
+        var messages = "<table id=\"mail\">"
         messageArray.forEach(function(message) {
-        	messages += "<tr><td>" + message["sender"] + "</td>";
+        	messages += "<tr id=\""+message["message_id"]+"\"><td>" + message["sender"] + "</td>";
         	messages += "<td><a class=\"message_link\" value=\"" + message["message_id"] + "\">";
         	messages += message["subject"] + "</a></td>";
         	messages += "<td>"+ message["time"] + "</td></tr>";
     	});
+    	messages+= "<tr><td><a id='new_message'>New Message</a></td></tr>"
 
         messages+= "</table>"                
-    	$("#main").html(messages);
+    	$("#mailbox").html(messages);
     	$(".message_link").click(function() {
-    		console.log($(this).attr('value'));
     		$.get("getmessage.php?id="+ $(this).attr('value'), function(data, status){
-    			$('#main').append("<p>"+data+"</p>");
+    			console.log(data);
+    			var message = JSON.parse(data);
+    			var output = "<b>From:</b>"+message['sender'];
+    			output	+= "<br>"+nl2br(message['message']);
+
+    			//$("#mailbox").html(output);
+    			$("#message").html(output);
     		});
 			
 		});
+
+		$("#new_message").click(function() {
+
+    			var output = "<table><tr><td>To:</td><td><input type='text' id='message_to' placeholder='username' size='20'></td></tr>";
+    			output 	+= "<tr><td>Subject:</td><td><input type='text' id='message_subject' placeholder='subject' size='70'></td></tr>";
+    			output	+= "<tr><td></td><td><textarea id='message_body' placeholder='Type your message here' rows='40' cols='60'></textarea></td></tr>";
+    			output	+= "<tr><td></td><td><button id='send_message'>Send</button></td></tr></table>";
+
+
+    			//$("#mailbox").html(output);
+    			$("#message").html(output);
+    			$("#message_body").css('white-space', 'pre');
+			
+$("#send_message").click(function(){
+		var recipient= $("#message_to").val();
+		console.log($("#message_to").val());
+		var subject= $("#message_subject").val();
+		var body = $("#message_body").val();
+			console.log(body);
+		var message = body.replace(/\r\n|\r|\n/g,"<br />");
+			console.log(message);
+		$.get("sendmessage.php?recipient="+recipient+"&subject="+subject+"&message="+message, function(data, status){
+    		var output = "Message Sent!";
+    		//$("#mailbox").html(output);
+    		$("#message").html(output);
+    		});
+		});
+
+		});
+		
 	});
+
+
+}
+
+function setSearch(){
+	$("#main").html("<h3>Search</h3><input type='text' id='search_txt'/><h5>Results</h5><span id='results'></span>");
+	console.log("made it");
+	console.log($("#search_txt").attr("id"));
+	$("#search_txt").keyup(function() {
+			console.log($("#search_txt").val());
+  			$.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
+  				$("#results").html(data);
+  				setListeners();
+  			});
+  		});
 }

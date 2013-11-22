@@ -15,8 +15,8 @@ if(mysqli_connect_errno($con)) {
 	//grab the courses that $username is taking
 	$content = mysqli_query($con, "SELECT * 
 								   FROM (SELECT course_id 
-								   		 FROM courses_taken 
-								   		 WHERE username = '$username') c NATURAL JOIN courses");
+								   		 FROM COURSES_TAKEN
+								   		 WHERE username = '$username') c NATURAL JOIN COURSES");
 
 	
 	if(!$content) {
@@ -26,7 +26,8 @@ if(mysqli_connect_errno($con)) {
 		while($row = mysqli_fetch_array($content)) {
 
 			//createa array for this course
-			$arr = array('course_num' => $row["course_num"],
+			$arr = array('course_id' => $row["course_id"],
+						 'course_num' => $row["course_num"],
 						 'course_name' => $row["course_name"],
 						 'location' => $row["location"],
 						 'time' => $row["time"]);

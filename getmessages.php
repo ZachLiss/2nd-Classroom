@@ -12,11 +12,11 @@ if(mysqli_connect_errno($con)) {
 	$result = array();
 	
 	//grab the courses that $username is taking
-	$content = mysqli_query($con, "SELECT MESSAGES.message_id, MESSAGES.subject, MESSAGES.time, USERS.first_name, USERS.last_name FROM MESSAGES, USERS WHERE MESSAGES.recipient = '$username' and MESSAGES.sender = USERS.username");
+	$content = mysqli_query($con, "SELECT MESSAGES.message_id, MESSAGES.subject, MESSAGES.time, USERS.first_name, USERS.last_name FROM MESSAGES, USERS WHERE MESSAGES.recipient = '$username' and MESSAGES.sender = USERS.username ORDER BY time DESC");
 
 	
 	if(!$content) {
-			echo "bad query";
+			$arr = array('message_id' => '', 'subject' => '', 'sender' =>'', 'time' => '');
 		} else if(mysqli_num_rows($content) > 0) {
 			
 			while($row = mysqli_fetch_array($content)) {
@@ -30,8 +30,9 @@ if(mysqli_connect_errno($con)) {
 			}
 
 			//encode the array in javascript format
-			echo json_encode($result);
+			
 		}
+		echo json_encode($result);
 }
 
 ?>

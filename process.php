@@ -5,6 +5,11 @@
 require_once('functions.php');
 session_start();
 
+if( isset($_GET['log_out'])){
+	session_destroy();
+	header( 'Location: index.php' );
+}
+
 if( isset($_POST['signin_submit']) ) {
 	$result = get_user( $_POST['username']);
 	if($result == FALSE){
@@ -41,9 +46,12 @@ elseif ( isset($_POST['signup_submit'])){
 	elseif($result== 1) {//username duplicate
 		header( 'Location: signup.php?userdup=true' );
 	}
-		elseif($result== 2) {//email duplicate
+	elseif($result== 2) {//email duplicate
 		header( 'Location: signup.php?emaildup=true' );
-		}
+	}
+	elseif($result== 3) {//invalid email address
+		header( 'Location: signup.php?invalidemail=true' );
+	}
 }
 
 
