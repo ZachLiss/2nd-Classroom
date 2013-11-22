@@ -10,9 +10,9 @@
 		<script>
 			$(document).ready(function() {
 				localStorage["username"] = "pel37";
-				localStorage["class_id"] = "test";
+				var course_id; //need to get this from somewhere
 				$("Create_Class").onclick(function() {
-					creategroup($("creategroup.php?username=" + localSTorage[username] + "&course_id=" + localStorage[class_id] + "&group_name=" + $("#gName").val() + "&time=" + $("#time").val() + "&location=" + $("#location").val()));
+					creategroup($("creategroup.php?username=" + localSTorage[username] + "&course_id=" + $("#course_id").val() + "&group_name=" + $("#gName").val() + "&time=" + $("#time").val() + "&location=" + $("#location").val()));
 				});
 			});
 		</script>
