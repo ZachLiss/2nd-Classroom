@@ -52,10 +52,10 @@ function viewCourse(cid) {
     $("#main").html("<span id='titlespan'></span><span id='groupspan'></span><span id='userspan'></span>");
     $.get("getcourse.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         var courseArray = JSON.parse(data);
-        var courseData = "<h2>"+courseArray["course_num"]+" "+courseArray["course_name"]+"</h2>";
+        var courseData = "<h1>"+courseArray["course_num"]+" <span>"+courseArray["course_name"];
         courseData += "<p>"+courseArray["instructor"]+"</p>";
         courseData += "<p>"+courseArray["location"]+"</p>";
-        courseData += "<p>"+courseArray["time"]+"</p>";
+        courseData += "<p>"+courseArray["time"]+"</p></span></h1>";
         $("#titlespan").html(courseData);
         setListeners();
     });
@@ -78,16 +78,24 @@ function viewGroup(gid) {
     $.get("getgroup.php?gid="+gid, function(data,status) {
         var groupArray = JSON.parse(data);
         console.log(groupArray);
-        var groupData = "<h2>"+groupArray["group_name"]+"</h2>";
-        groupData += "<p>"+groupArray["course_num"]+" "+groupArray["course_name"]+"<p>";
+        var groupData = "<h1 >"+groupArray["group_name"]+"</h1>";
+        groupData += "<h3><p>"+groupArray["course_num"]+" "+groupArray["course_name"]+"<p>";
         groupData += "<p>"+groupArray["creator"]+"</p>";
         groupData += "<p>"+groupArray["location"]+"</p>";
-        groupData += "<p>"+groupArray["time"]+"</p>";
+        groupData += "<p>"+groupArray["time"]+"</p></h3>";
         $("#gtitlespan").html(groupData);
     });
 }
 
 
 function viewUser(username) {
-	console.log("viewing user username: "+username);
+	$("#main").html("<span id='gtitlespan'></span>");
+    console.log(username);
+    $.get("getuser.php?user="+username, function(data,status) {
+        var userArray = JSON.parse(data);
+        console.log(userArray);
+        var userData = "<h1>"+userArray["first_name"]+" "+userArray["last_name"]+"</h1>";
+        userData += "<h3><p>"+userArray["email"]+"<p></h3>";
+        $("#gtitlespan").html(userData);
+    });
 }

@@ -44,7 +44,9 @@ function get_messages() {
 	/*create two new divs for mailbox view and message view*/
 	$("#main").html("<div id=\"mail_header\"></div><div id=\"mailbox\"></div><div id=\"message\"></div>");
 	/* Style */
-	$("#mailbox").height("180px");
+	$("#mail_header").height("6%");
+	$("#mailbox").height("38%");
+	$("#message").height("56%");
 	$("#mailbox").css({'border-bottom': '2px solid black', 'overflow': 'auto'});
 	$("#message").css('overflow', 'auto');
 	/*Send get request to getmessages.php . This returns all field of a message table entry
@@ -117,7 +119,7 @@ $("#send_message").click(function(){
 }
 
 function setSearch(){
-	$("#main").html("<h3>Search</h3><input type='text' id='search_txt'/><h5>Results</h5><span id='results'></span>");
+	$("#main").html("<h1>Search</h1><input type='text' id='search_txt'/><h5>Results</h5><span id='results'></span>");
 	console.log("made it");
 	console.log($("#search_txt").attr("id"));
 	$("#search_txt").keyup(function() {
