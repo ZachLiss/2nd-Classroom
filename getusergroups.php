@@ -12,8 +12,8 @@ if(mysqli_connect_errno($con)) {
 	
 	$content = mysqli_query($con, "SELECT * 
 								   FROM (SELECT group_id 
-								   		 FROM groups_joined 
-								   		 WHERE username = '$username') g natural join groups");
+								   		 FROM GROUPS_JOINED
+								   		 WHERE username = '$username') g natural join GROUPS");
 
 
 	if(!$content) {
