@@ -74,18 +74,20 @@ border:1px solid #ccc;
 
 
 #footer{
-text-align:center;
-padding:20px;
+text-align:right;
+padding:0px;
 margin:0;
 border-top:1px solid #ddd;
-color:#999;
+color:#86dc00;
 font-size:0.8em;
-text-shadow:0px 1px 1px #fff;
-position: relative;
-top:0;
+position: absolute;
+bottom:0;
 left:0;
-background:#fff;
+width:100%;
+background:#000;
 }
+
+#footer a{color:#86dc00;}
 
 	#link-top{
 	display:none;
@@ -276,15 +278,25 @@ overflow: auto;
 #main h1 input{padding:0;}
 #main h3 {
 	font-size: 1em;
+	font-weight: bold;
 	color: black;
 	letter-spacing:3px;
 	background-color: #86dc00;
 	padding:5;
 	margin-top: 0px;
+	border-bottom:2px solid black;
+	border-top:2px solid black;
 }
 
 #main p {margin-top: 0px;}
 
 #main span {color:white}
 
+#mail_header th  {padding: 0 0 0 0;}
+
 #mailbox td {cursor: pointer;}
+
+#user_courses {
+max-height: 40%;
+overflow: auto;
+}

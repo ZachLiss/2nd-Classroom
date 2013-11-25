@@ -44,8 +44,8 @@ function get_messages() {
 	/*create two new divs for mailbox view and message view*/
 	$("#main").html("<div id=\"mail_header\"></div><div id=\"mailbox\"></div><div id=\"message\"></div>");
 	/* Style */
-	$("#mail_header").height("6%");
-	$("#mailbox").height("38%");
+	$("#mail_header").height("7%");
+	$("#mailbox").height("37%");
 	$("#message").height("56%");
 	$("#mailbox").css({'border-bottom': '2px solid black', 'overflow': 'auto'});
 	$("#message").css('overflow', 'auto');
@@ -57,7 +57,7 @@ function get_messages() {
         //parse data into an array
         var messageArray = JSON.parse(data);
                         
-        var header = "<table><tr><th>From:</th><th>Subject:</th><th>Time/Date</th></tr></table>";
+        var header = "<table><tr><th><h1>From:</h1></th><th><h1>Subject:</h1></th><th><h1>Time/Date</h1></th></tr></table>";
         $("#mail_header").html(header);
         console.log(messageArray);
         var messages = "<table id=\"mail\">"
@@ -125,7 +125,6 @@ function setSearch(){
 			console.log($("#search_txt").val());
   			$.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
   				$("#results").html(data);
-  				setListeners();
   			});
   		});
 }

@@ -1,14 +1,11 @@
 
 $(document).ready(function(){
 	//this is only for testing...
-	localStorage["username"] = "zll1";
-
-	setListeners();
 
   	$("#search_txt").keyup(function() {
   		$.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
   			$("#results").html(data);
-  			setListeners();
+  			
   		});
   	});
 });
@@ -57,17 +54,17 @@ function viewCourse(cid) {
         courseData += "<p>"+courseArray["location"]+"</p>";
         courseData += "<p>"+courseArray["time"]+"</p></span></h1>";
         $("#titlespan").html(courseData);
-        setListeners();
+
     });
 
     $.get("getcoursegroups.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         $("#groupspan").html(data);
-        setListeners();
+
     });
 
     $.get("getcourseusers.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         $("#userspan").html(data);
-        setListeners();
+
     });
 }
 

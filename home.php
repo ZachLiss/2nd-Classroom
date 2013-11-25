@@ -79,7 +79,7 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $_SESSION
 ?>
 <div id="user_bar">
 		<center>
-		<span class="tooltip-bottom" title="Click to setup or edit your Gravatar image."><a href="https://en.gravatar.com/site/login"><img id= "photo" src="<?php echo $grav_url; ?>" alt="" /></a></span><br>
+		<span class="tooltip-bottom" title="Click to setup or edit your Gravatar image."><a href="https://en.gravatar.com/site/login" target="_blank"><img id= "photo" src="<?php echo $grav_url; ?>" alt="" /></a></span><br>
 		</center>
 		<div id="user_courses">
 			<table id="courses">
@@ -93,6 +93,9 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $_SESSION
 </div>
 
 <div id="main">
+</div>
+<div id="footer">
+        <a id="help" class="nav_but">Help</a><span style="color: white">&emsp;&copy; 2ndClassroom 2013</span>
 </div>
 
 </body>

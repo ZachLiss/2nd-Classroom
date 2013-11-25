@@ -25,7 +25,7 @@ if(mysqli_connect_errno($con)) {
 			echo "<tr>";
 			echo "<td>$row[first_name] $row[last_name]</td>";
 			echo "<td>$row[email]</td>";
-			echo "<td><button class=\"view_user\" value=\"$row[username]\">View User</button></td>";
+			echo "<td><button class=\"view_user small blue\" value=\"$row[username]\">View User</button></td>";
 			echo "</tr>";
 			
 		}

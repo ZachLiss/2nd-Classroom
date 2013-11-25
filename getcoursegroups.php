@@ -33,7 +33,7 @@ if(mysqli_connect_errno($con)) {
 				echo "<td>$row[location]</td>";
 				echo "<td>$row[time]</td>";
 				echo "<td>$row[creator]</td>";
-				echo "<td><button class=\"join_group\" value=\"$row[group_id]\">Join Group</button></td>";
+				echo "<td><button class=\"join_group  small blue\" value=\"$row[group_id]\">Join Group</button></td>";
 				echo "</tr>";
 			} else {
 				//student is in the group
@@ -42,7 +42,7 @@ if(mysqli_connect_errno($con)) {
 				echo "<td>$row[location]</td>";
 				echo "<td>$row[time]</td>";
 				echo "<td>$row[creator]</td>";
-				echo "<td><button class=\"view_group\" value=\"$row[group_id]\">View Group</button></td>";
+				echo "<td><button class=\"view_group  small blue\" value=\"$row[group_id]\">View Group</button></td>";
 				echo "</tr>";
 			}
 			
