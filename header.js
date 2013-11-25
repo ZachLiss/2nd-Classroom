@@ -119,12 +119,39 @@ $("#send_message").click(function(){
 
 function setSearch(){
 	$("#main").html("<h1>Search   <input type='text' id='search_txt'/></h1><span id='results'></span>");
-	console.log("made it");
+	
 	console.log($("#search_txt").attr("id"));
 	$("#search_txt").keyup(function() {
-			console.log($("#search_txt").val());
-  			$.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
-  				$("#results").html(data);
-  			});
+		console.log($("#search_txt").val());
+  		$.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
+  			$("#results").html(data);
+  			setListeners();
   		});
+  		
+  	});
+}
+
+function setListeners() {
+   // console.log("setting listeners");
+	$(".join_course").click(function() {
+        joinCourse($(this).val());
+    });
+
+    $(".join_group").click(function() {
+        joinGroup($(this).val());
+    });
+
+    $(".view_course").click(function() {
+        console.log("viewing course");
+        viewCourse($(this).attr('value'));
+    });
+
+    $(".view_group").click(function() {
+        console.log("trying to view group gid: "+$(this).val());
+        viewGroup($(this).attr('value'));
+    });
+
+    $(".view_user").click(function() {
+        viewUser($(this).val());
+    });
 }

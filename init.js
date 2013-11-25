@@ -11,7 +11,7 @@ $(document).ready(function(){
 });
 
 function setListeners() {
-   // console.log("setting listeners");
+    console.log("setting listeners");
 	$(".join_course").click(function() {
         joinCourse($(this).val());
     });
@@ -21,6 +21,7 @@ function setListeners() {
     });
 
     $(".view_course").click(function() {
+        console.log("viewing course");
         viewCourse($(this).attr('value'));
     });
 
@@ -59,13 +60,14 @@ function viewCourse(cid) {
 
     $.get("getcoursegroups.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         $("#groupspan").html(data);
-
+        setListeners();
     });
 
     $.get("getcourseusers.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         $("#userspan").html(data);
-
+        setListeners();
     });
+    
 }
 
 function viewGroup(gid) {
@@ -77,7 +79,7 @@ function viewGroup(gid) {
         console.log(groupArray);
         var groupData = "<h1 >"+groupArray["group_name"]+"</h1>";
         groupData += "<h3><p>"+groupArray["course_num"]+" "+groupArray["course_name"]+"<p>";
-        groupData += "<p>"+groupArray["creator"]+"</p>";
+        groupData += "<p>"+groupArray["description"]+"</p>";
         groupData += "<p>"+groupArray["location"]+"</p>";
         groupData += "<p>"+groupArray["time"]+"</p></h3>";
         $("#gtitlespan").html(groupData);

@@ -21,6 +21,7 @@ CREATE TABLE COURSES(
 CREATE TABLE GROUPS(
 	group_id int NOT NULL AUTO_INCREMENT,
 	group_name varchar(100),
+	description text,
 	course_id int,
 	creator varchar(10),
 	location varchar(200),

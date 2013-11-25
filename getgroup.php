@@ -11,7 +11,7 @@ if(mysqli_connect_errno($con)) {
 	$gid = $_GET["gid"];
 	
 	//grab the courses that $username is taking
-	$content = mysqli_query($con, "SELECT c.course_num, c.course_name, g.creator, g.location, g.time, g.group_name
+	$content = mysqli_query($con, "SELECT c.course_num, c.course_name, g.creator, g.location, g.time, g.group_name, g.description
 								   FROM GROUPS g JOIN COURSES c ON g.course_id = c.course_id
 								   WHERE group_id = $gid");
 
@@ -26,7 +26,7 @@ if(mysqli_connect_errno($con)) {
 		$result = array('group_name' => $row["group_name"], 
 						'course_num' => $row["course_num"],
 		 				'course_name' => $row["course_name"],
-		 				'creator' => $row["creator"], 
+		 				'description' => $row["description"], 
 		 				'location' => $row["location"], 
 		 				'time' => $row["time"]);
 			

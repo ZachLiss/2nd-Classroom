@@ -33,7 +33,7 @@ if(mysqli_connect_errno($con)) {
 						'group_name' => $row["group_name"], 
 						//'course_num' => $row["course_num"],
 		 				//'course_name' => $row["course_name"],
-		 				'creator' => $row["creator"], 
+		 				'description' => $row["description"], 
 		 				'location' => $row["location"], 
 		 				'time' => $row["time"],
 		 				'in_group' => "false");
@@ -43,7 +43,7 @@ if(mysqli_connect_errno($con)) {
 						'group_name' => $row["group_name"], 
 						//'course_num' => $row["course_num"],
 		 				//'course_name' => $row["course_name"],
-		 				'creator' => $row["creator"], 
+		 				'description' => $row["description"], 
 		 				'location' => $row["location"], 
 		 				'time' => $row["time"],
 		 				'in_group' => "true");

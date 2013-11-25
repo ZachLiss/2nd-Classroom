@@ -19,7 +19,7 @@ require_once('functions.php')
                 //get the list of courses for the user
                 $.get("getusercourses.php?username="+localStorage['username'], function(data, status) {
                 		JSON.stringify(data);
-                        console.log(data);
+                        //console.log(data);
                         //parse data into an array
                         var courseArray = JSON.parse(data);
                         
@@ -30,7 +30,7 @@ require_once('functions.php')
                                 courseList += "<tr><td><a class=\"view_course\" value=\""+course["course_id"]+"\">" + course["course_num"]+": ";
                                 courseList += course["course_name"] + "</a></td></tr>";
                         });
-                        courseList+="</table>"
+                        courseList+="</table>";
                         
                         $("#user_courses").html(courseList);
 
@@ -38,7 +38,7 @@ require_once('functions.php')
 
         $.get("getusergroups.php?username="+localStorage['username'], function(data, status) {
                 		JSON.stringify(data);
-                        console.log(data);
+                       // console.log(data);
                         //parse data into an array
                         var groupArray = JSON.parse(data);
                         
@@ -49,7 +49,7 @@ require_once('functions.php')
                                 groupList += "<tr><td><a class=\"view_group\" value=\""+group["group_id"]+"\">";
                                 groupList += group["group_name"] + "</a></td></tr>";
                         });
-                        groupList+="</table>"
+                        groupList+="</table>";
                         
                         $("#user_groups").html(groupList);
                         setListeners();
@@ -79,7 +79,7 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $_SESSION
 ?>
 <div id="user_bar">
 		<center>
-		<span class="tooltip-bottom" title="Click to setup or edit your Gravatar image."><a href="https://en.gravatar.com/site/login" target="_blank"><img id= "photo" src="<?php echo $grav_url; ?>" alt="" /></a></span><br>
+		<span class="tooltip-bottom" title="Click to setup or edit your Gravatar image."><a href="https://en.gravatar.com/site/login"><img id= "photo" src="<?php echo $grav_url; ?>" alt="" /></a></span><br>
 		</center>
 		<div id="user_courses">
 			<table id="courses">
@@ -93,9 +93,6 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $_SESSION
 </div>
 
 <div id="main">
-</div>
-<div id="footer">
-        <a id="help" class="nav_but">Help</a><span style="color: white">&emsp;&copy; 2ndClassroom 2013</span>
 </div>
 
 </body>
