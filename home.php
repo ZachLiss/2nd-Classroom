@@ -52,7 +52,6 @@ require_once('functions.php')
                         groupList+="</table>";
                         
                         $("#user_groups").html(groupList);
-                        setListeners();
                 });
 setNavigation();
 $("#main").load("calendar.php");

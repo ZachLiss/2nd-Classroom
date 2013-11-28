@@ -125,33 +125,7 @@ function setSearch(){
 		console.log($("#search_txt").val());
   		$.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
   			$("#results").html(data);
-  			setListeners();
   		});
   		
   	});
-}
-
-function setListeners() {
-   // console.log("setting listeners");
-	$(".join_course").click(function() {
-        joinCourse($(this).val());
-    });
-
-    $(".join_group").click(function() {
-        joinGroup($(this).val());
-    });
-
-    $(".view_course").click(function() {
-        console.log("viewing course");
-        viewCourse($(this).attr('value'));
-    });
-
-    $(".view_group").click(function() {
-        console.log("trying to view group gid: "+$(this).val());
-        viewGroup($(this).attr('value'));
-    });
-
-    $(".view_user").click(function() {
-        viewUser($(this).val());
-    });
 }

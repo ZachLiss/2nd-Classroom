@@ -1,37 +1,37 @@
 
 $(document).ready(function(){
-	//this is only for testing...
+    setListeners();	
 
   	$("#search_txt").keyup(function() {
   		$.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
   			$("#results").html(data);
   			
   		});
-  	});
+  	});    
 });
 
 function setListeners() {
     console.log("setting listeners");
-	$(".join_course").click(function() {
+
+    $("body").on("click", ".join_course", function() {
         joinCourse($(this).val());
-    });
+    }); 
 
-    $(".join_group").click(function() {
+    $("body").on("click", ".join_group", function() {
         joinGroup($(this).val());
-    });
+    }); 
 
-    $(".view_course").click(function() {
-        console.log("viewing course");
+    $("body").on("click", ".view_course", function() {
         viewCourse($(this).attr('value'));
     });
 
-    $(".view_group").click(function() {
+    $("body").on("click", ".view_group", function() {
         console.log("trying to view group gid: "+$(this).val());
         viewGroup($(this).attr('value'));
     });
 
-    $(".view_user").click(function() {
-        viewUser($(this).val());
+    $("body").on("click", ".view_user", function() {
+         viewUser($(this).val());
     });
 }
 
@@ -43,10 +43,12 @@ function joinCourse(cid) {
 
 function joinGroup(gid) {
     console.log("joining group gid: "+gid);
+    $.get("joingroup.php?gid="+gid+"&username="+localStorage["username"]);
+    viewGroup(gid);
 }
 
 function viewCourse(cid) {
-    //console.log("viewing course cid: "+cid);
+    console.log("viewing course cid: "+cid);
     $("#main").html("<span id='titlespan'></span><span id='groupspan'></span><span id='userspan'></span>");
     $.get("getcourse.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         var courseArray = JSON.parse(data);
@@ -60,14 +62,12 @@ function viewCourse(cid) {
 
     $.get("getcoursegroups.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         $("#groupspan").html(data);
-        setListeners();
     });
 
     $.get("getcourseusers.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         $("#userspan").html(data);
-        setListeners();
     });
-    
+
 }
 
 function viewGroup(gid) {

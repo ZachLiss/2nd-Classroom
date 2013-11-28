@@ -21,9 +21,9 @@ if(mysqli_connect_errno($con)) {
 
 
 	if($content) {
-			echo "Group already exists in course $course_id";
+		echo "Group already exists in course $course_id";
 
-		} else {
+	} else {
 			$SQL = "INSERT INTO GROUPS (group_name, course_id, creator, location, time) VALUES ($group_name, $course_id, $username, $location, $time)";
 			$content = mysqli_query($con, "Select group_id
 											FROM GROUPS
@@ -32,9 +32,8 @@ if(mysqli_connect_errno($con)) {
 			$row=mysqli_fetch_array($content);
 			$SQL = "INSERT INTO GROUPS_JOINED (group_id, username) VALUES ($row[group_id], $username)";
 			echo "Course $group_name added to the database and joined."
-
-			}
 		}
+	}
 }
 
 ?>
