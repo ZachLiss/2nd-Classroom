@@ -15,48 +15,48 @@ require_once('functions.php')
 
 	<script>
 	$(document).ready(function(){
-	localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
-                //get the list of courses for the user
-                $.get("getusercourses.php?username="+localStorage['username'], function(data, status) {
-                		JSON.stringify(data);
-                        //console.log(data);
-                        //parse data into an array
-                        var courseArray = JSON.parse(data);
+	   localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
+        //get the list of courses for the user
+        $.get("getusercourses.php?username="+localStorage['username'], function(data, status) {
+            JSON.stringify(data);
+            //console.log(data);
+            //parse data into an array
+            var courseArray = JSON.parse(data);
                         
-                        var courseList = "<table><caption><h1>COURSES</h1><caption>";
+            var courseList = "<table><caption><h1>COURSES</h1><caption>";
 
-                        console.log(courseArray);
-                        courseArray.forEach(function(course) {
-                                courseList += "<tr><td><a class=\"view_course\" value=\""+course["course_id"]+"\">" + course["course_num"]+": ";
-                                courseList += course["course_name"] + "</a></td></tr>";
-                        });
-                        courseList+="</table>";
+            console.log(courseArray);
+            courseArray.forEach(function(course) {
+                courseList += "<tr><td><a class=\"view_course\" value=\""+course["course_id"]+"\">" + course["course_num"]+": ";
+                courseList += course["course_name"] + "</a></td></tr>";
+            });
+            courseList+="</table>";
                         
-                        $("#user_courses").html(courseList);
-
-                });
+            $("#user_courses").html(courseList);
+        });
 
         $.get("getusergroups.php?username="+localStorage['username'], function(data, status) {
-                		JSON.stringify(data);
-                       // console.log(data);
-                        //parse data into an array
-                        var groupArray = JSON.parse(data);
+            JSON.stringify(data);
+            // console.log(data);
+            //parse data into an array
+            var groupArray = JSON.parse(data);
                         
-                        var groupList = "<table><caption><h1>GROUPS</h1><caption>";
+            var groupList = "<table><caption><h1>GROUPS</h1><caption>";
 
-                        console.log(groupArray);
-                        groupArray.forEach(function(group) {
-                                groupList += "<tr><td><a class=\"view_group\" value=\""+group["group_id"]+"\">";
-                                groupList += group["group_name"] + "</a></td></tr>";
-                        });
-                        groupList+="</table>";
+            console.log(groupArray);
+            groupArray.forEach(function(group) {
+                groupList += "<tr><td><a class=\"view_group\" value=\""+group["group_id"]+"\">";
+                groupList += group["group_name"] + "</a></td></tr>";
+            });
+            groupList+="</table>";
                         
-                        $("#user_groups").html(groupList);
-                });
-setNavigation();
-$("#main").load("calendar.php");
+            $("#user_groups").html(groupList);
+        });
+        
+        setNavigation();
+     $("#main").load("calendar.php");
+    });
 
-});
 	</script>
 </head>
 <body>

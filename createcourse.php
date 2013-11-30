@@ -1,6 +1,6 @@
 <?php
 // create connection
-$con = mysqli_connect("localhost", "root", "root", "2nd_classroom_db");
+$con = mysqli_connect("localhost", "admin", "admin", "2nd_classroom_db");
 
 //check connection
 if(mysqli_connect_errno($con)) {
@@ -8,7 +8,7 @@ if(mysqli_connect_errno($con)) {
 } else {
 
 	$username = $_GET["username"];
-	$course_num = $_GET["course_num"]
+	$course_num = $_GET["course_num"];
 	$course_name = $_GET["course_name"];
 	$instructor = $_GET["instructor"];
 	$ta = $_GET["ta"];
@@ -16,26 +16,43 @@ if(mysqli_connect_errno($con)) {
 	$time = $_GET["time"];
 	//find if class exists
 	$content = mysqli_query($con, "SELECT *
-								   FROM (SELECT course_num
-								   		 FROM COURSES
-								   		 WHERE course_num = '$course_num')");
+								   FROM COURSES
+								   WHERE course_num = '$course_num'");
 
 
-	if($content) {
-			echo "Course already exists.";
-			echo "$content";
-		} else {
-			$SQL = "INSERT INTO COURSES (course_num, course_name, instructor, ta, location, time) VALUES ($course_num, $course_name, $instructor, $ta, $location, $time)";
+								   // (SELECT course_num
+								   // 		 FROM COURSES
+								   // 		 WHERE course_num = '$course_num')");
 
-			$content = mysqli_query($con, "Select course_id
+
+	if(mysqli_num_rows($content) > 0) {
+		//echo "Course already exists.";
+		//echo "$content";
+
+		$row = mysqli_fetch_array($content);
+		$result = array('course_id' => $row["course_id"]);
+		echo json_encode($result);
+	} else {
+
+		$SQL = "INSERT INTO COURSES (course_num, course_name, instructor, ta, location, time) VALUES ('$course_num', '$course_name', '$instructor', '$ta', '$location', '$time')";
+		//echo $SQL;
+
+		$content = mysqli_query($con, $SQL);
+
+		$content = mysqli_query($con, "Select course_id
 											FROM COURSES
-											WHERE course_num = '$course_num'")
+											WHERE course_num = '$course_num'");
 
-			$row=mysqli_fetch_array($content);
-			$SQL = "INSERT INTO COURSES_TAKEN (course_id, username) VALUES ($row[course_id], $username)";
-			echo "Course $course_name added to the database and joined."
-			}
-		}
+		$row=mysqli_fetch_array($content);
+		$SQL = "INSERT INTO COURSES_TAKEN (course_id, username) VALUES ($row[course_id], '$username')";
+
+		$content = mysqli_query($con, $SQL);
+		//echo "Course $course_name added to the database and joined.";
+
+		$result = array('course_id' => $row["course_id"]);
+
+		echo json_encode($result);
+	}
 }
 
 ?>

@@ -47,6 +47,7 @@ if(mysqli_connect_errno($con)) {
 				echo "</tr>";
 				
 			}
+			echo "<tr><td>Couldn't find your course?</td><td><button class=\"create_course small blue\">Create Course</button></td></tr>";
 			echo "</table>";
 		}
 

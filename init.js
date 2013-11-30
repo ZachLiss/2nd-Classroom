@@ -33,6 +33,15 @@ function setListeners() {
     $("body").on("click", ".view_user", function() {
          viewUser($(this).val());
     });
+
+    $("body").on("click", ".create_course", function(){
+        console.log("create course");
+        createCourse();
+    });
+
+    $("body").on("click", ".create_group", function() {
+        createGroup();
+    });
 }
 
 function joinCourse(cid) {
@@ -86,7 +95,6 @@ function viewGroup(gid) {
     });
 }
 
-
 function viewUser(username) {
 	$("#main").html("<span id='gtitlespan'></span>");
     console.log(username);
@@ -98,3 +106,40 @@ function viewUser(username) {
         $("#gtitlespan").html(userData);
     });
 }
+
+function createCourse() {
+    var html = "<h5>Course Number -- Course Name</h5>";
+        html += "<input type=\"text\" id=\"course_num\">";
+        //html += "<h5>Course Name</h5>";
+        html += "<input type=\"text\" id=\"course_name\">";
+        html += "<h5>Instructor</h5>";
+        html += "<input type=\"text\" id=\"instructor\">";
+        html += "<h5>TA</h5>";
+        html += "<input type=\"text\" id=\"ta\">";
+        html += "<h5>Location</h5>";
+        html += "<input type=\"text\" id=\"location\">";
+        html += "<h5>Time</h5>";
+        html += "<input type=\"text\" id=\"time\"><br>";
+        html += "<button id=\"submit_class\">Create Class</button>";
+
+    $("#main").html(html);
+
+    $("#submit_class").click(function() {
+        console.log("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&time="+$("#time").val());
+        $.get("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&time="+$("#time").val(), function(data, status) {
+            console.log(data);
+            var a = JSON.parse(data);
+            viewCourse(a['course_id']);
+        });
+    });
+}
+
+function createGroup() {
+
+}
+
+
+
+
+
+

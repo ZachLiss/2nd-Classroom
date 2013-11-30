@@ -1,18 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-"http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html>
 	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Create a Course</title>
 		<meta name="author" content="Peter Lancaster" />
-
 		<script>
 			$(document).ready(function() {
 				localStorage["username"] = "pel37";
 				var course_id; //need to get this from somewhere
-				$("Create_Class").onclick(function() {
-					creategroup($("creategroup.php?username=" + localSTorage[username] + "&course_id=" + $("#course_id").val() + "&group_name=" + $("#gName").val() + "&time=" + $("#time").val() + "&location=" + $("#location").val()));
+				$(".Create_Class").click(function() {
+					console.log("blash");
+					$.get("creategroup.php?username=" + localStorage["username"] + "&course_id=" + $("#course_id").val() + "&group_name=" + $("#gName").val() + "&time=" + $("#time").val() + "&location=" + $("#location").val());
 				});
 			});
 		</script>
@@ -32,7 +32,21 @@
 		<br>
 		<button class="Create_Class">
 			Create Group
-		</button>
+		</button> <br>
+
+		<h5>Course Number</h5>
+		<input type="text" id="course_num">
+		<h5>Course Name</h5>
+		<input type="text" id="course_name">
+		<h5>Instructor</h5>
+		<input type="text" id="instructor">
+		<h5>TA</h5>
+		<input type="text" id="ta">
+		<h5>Location</h5>
+		<input type="text" id="location">
+		<h5>Time</h5>
+		<input type="text" id="time">
+
 	</body>
 </html>
 
