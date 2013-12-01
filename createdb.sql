@@ -59,5 +59,18 @@ CREATE TABLE MESSAGES(
 	CONSTRAINT message_fk2 FOREIGN KEY(recipient) REFERENCES USERS(username)
 );
 
+CREATE TABLE NOTES(
+	note_id int NOT NULL AUTO_INCREMENT,
+	poster varchar(10),
+	group_id varchar(10),
+	title varchar(50),
+	note text,
+	time datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	CONSTRAINT notes_pk PRIMARY KEY(note_id),
+	CONSTRAINT note_fk1 FOREIGN KEY(poster) REFERENCES USERS(username),
+	CONSTRAINT note_fk2 FOREIGN KEY(group_id) REFERENCES GROUPS(group_id)
+);
+
+
 
 COMMIT;
