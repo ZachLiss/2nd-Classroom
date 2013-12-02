@@ -7,7 +7,7 @@ if(mysqli_connect_errno($con)) {
 
 	$poster = $_SESSION["username"];
 	$title = $_GET["title"];
-	$message = $_GET["note"];
+	$note = $_GET["note"];
 	$group_id = $_GET["group_id"];
 	//find if class exists
 	$content = mysqli_query($con, "INSERT INTO NOTES (poster, title, note, group_id ) VALUES ('$poster', '$title', '$note', '$group_id')");
