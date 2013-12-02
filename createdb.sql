@@ -67,8 +67,8 @@ CREATE TABLE NOTES(
 	note text,
 	time datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	CONSTRAINT notes_pk PRIMARY KEY(note_id),
-	CONSTRAINT note_fk1 FOREIGN KEY(poster) REFERENCES USERS(username),
-	CONSTRAINT note_fk2 FOREIGN KEY(group_id) REFERENCES GROUPS(group_id)
+	CONSTRAINT notes_fk1 FOREIGN KEY(poster) REFERENCES USERS(username),
+	CONSTRAINT notes_fk2 FOREIGN KEY(group_id) REFERENCES GROUPS(group_id)
 );
 
 
