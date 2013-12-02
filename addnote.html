@@ -13,6 +13,7 @@
 
 		<script>
 			$(document).ready(function() {
+			
 				$(".Post_Note").click(function() {
 					console.log("note submitted");
 $.get("postnote.php?group_id=" + $("#gID").val() + "&title=" + $("#tit").val() + "&time=" + $("#tim").val() + "&note=" + $("#noteTxt").val());
@@ -29,7 +30,8 @@ $.get("postnote.php?group_id=" + $("#gID").val() + "&title=" + $("#tit").val() +
 		<h5>Group ID</h5>
 		<input type="text" id="gID"/>
 		<h5>Note Text</h5>
-		<input type="text" id="noteTxt"/>
+		<textarea rows="4" cols="50" id ="noteTxt">
+</textarea>
 		<h5>Time</h5>
 		<input type="text" id="tim"/>
 		<br>
