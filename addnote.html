@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Add a note</title>
+		<meta name="author" content="Peter Lancaster" />
+
+		<script>
+			$(document).ready(function() {
+				$(".Post_Note").click(function() {
+					console.log("note submitted");
+$.get("postnote.php?group_id=" + $("#gID").val() + "&title=" + $("#tit").val() + "&time=" + $("#tim").val() + "&note=" + $("#noteTxt").val());
+			
+				});
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<h5>Title</h5>
+		<input type="text" id="tit"/>
+		<h5>Group ID</h5>
+		<input type="text" id="gID"/>
+		<h5>Note Text</h5>
+		<input type="text" id="noteTxt"/>
+		<h5>Time</h5>
+		<input type="text" id="tim"/>
+		<br>
+		<br>
+		<button class="Post_Note">
+			Post Note
+		</button>
+	</body>
+</html>
