@@ -39,5 +39,4 @@ if(mysqli_connect_errno($con)) {
 		echo json_encode($result);
 }
 
-
 ?>
