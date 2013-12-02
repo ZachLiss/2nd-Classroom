@@ -5,10 +5,9 @@
 	<script>
 	$(document).ready(function(){
 
-		//get the list of courses for the user
+
 		$.get("getnotes.php?group_id=1", function(data, status) {
 			console.log(data);
-			//parse data into an array
 			var noteArray = JSON.parse(data);
 			var noteList = "";
 
