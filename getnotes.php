@@ -6,12 +6,12 @@ $con = mysqli_connect("localhost", "admin", "admin", "2nd_classroom_db");
 if(mysqli_connect_errno($con)) {
 	//echo "Failed to connect to MySQL: " . mysqli_connect_error();
 } else {
-
-	//get username and initialize a new empty array to return
+	
+	//get group id of group to be posted into
 	$username = $_GET["group_id"];
 	$result = array();
 
-	//grab the courses that $username is taking
+	//grab the notes from group
 	$content = mysqli_query($con, "SELECT NOTES.note_id, NOTES.title, NOTES.time FROM NOTES WHERE NOTES.group_id = '$group_id' ORDER BY time DESC");
 
 
