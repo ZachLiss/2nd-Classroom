@@ -86,12 +86,19 @@ function viewGroup(gid) {
     $.get("getgroup.php?gid="+gid, function(data,status) {
         var groupArray = JSON.parse(data);
         console.log(groupArray);
-        var groupData = "<h1 >"+groupArray["group_name"]+"</h1>";
+        var groupData = "<h1>"+groupArray["group_name"]+"</h1>";
         groupData += "<h3><p>"+groupArray["course_num"]+" "+groupArray["course_name"]+"<p>";
         groupData += "<p>"+groupArray["description"]+"</p>";
         groupData += "<p>"+groupArray["location"]+"</p>";
         groupData += "<p>"+groupArray["time"]+"</p></h3>";
         $("#gtitlespan").html(groupData);
+    });
+
+    $.get("getgroupusers.php?gid="+gid+"&username="+localStorage["username"], function(data, status) {
+        var a = JSON.parse(data);
+        var userData = "<h3>Users</h3>";
+
+        $('#guserspan').html(userData);
     });
 }
 
