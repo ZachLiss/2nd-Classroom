@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Test Thread</title>
+		<meta name="author" content="Peter Lancaster" />
+
+		<script>
+			$(document).ready(function() {
+				var thread_id = 1;
+
+
+			setInterval(function() {
+				$.get("getthreadmessages.php?thread_id=" + thread_id, function(data, status) {
+				console.log(data);
+				//parse data into an array
+				var messageArray = JSON.parse(data);
+				var messageList = "";
+
+				console.log(messageArray);
+				messageArray.forEach(function(message) {
+				messageList += "<p>User " + message["username"] + "</p>";
+				messageList += "<p>Said: " + message["content"] + "</p>";
+				messageList += "On " + message["time"] + "<hr>";
+
+					});
+
+				$("#gMessages").html(messageList); 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Test Thread</title>
+		<meta name="author" content="Peter Lancaster" />
+
+		<script>
+			$(document).ready(function() {
+				var thread_id = 1;
+
+
+			setInterval(function() {
+				$.get("getthreadmessages.php?thread_id=" + thread_id, function(data, status) {
+				console.log(data);
+				//parse data into an array
+				var messageArray = JSON.parse(data);
+				var messageList = "";
+
+				console.log(messageArray);
+				messageArray.forEach(function(message) {
+				messageList += "<p>User " + message["username"] + "</p>";
+				messageList += "<p>Said: " + message["content"] + "</p>";
+				messageList += "On " + message["time"] + "<hr>";
+
+					});
+
+				$("#gMessages").html(messageList);
+				});
+
+				}, 1000);
+
+
+			$(".Post_Thread").click(function() {
+
+$.get("addthreadmessage.php?thread_id=" + thread_id + "&content=" + $("#txt").val());
+console.log("message submitted");
+				});
+
+			});
+		</script>
+
+	</head>
+	<body>
+
+		<h3>Thread:</h3>
+		<span id="gMessages"></span>
+		<h5>Message Text</h5>
+		<textarea rows="4" cols="50" id ="txt">
+		</textarea>
+		<h5>thread_id</h5>
+		<input type="text" id="id"/>
+		<br>
+		<br>
+		<button class="Post_Thread">
+			Post to Thread
+		</button>
+	</body>
+</html>
+			
