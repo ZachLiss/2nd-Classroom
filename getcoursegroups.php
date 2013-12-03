@@ -17,7 +17,7 @@ if(mysqli_connect_errno($con)) {
 
 	if(!$content) {
 		echo "bad query";
-	} else if(mysqli_num_rows($content) > 0) {
+	} else { //if(mysqli_num_rows($content) > 0) {
 		echo "<h3>Groups:</h3>";
 		echo "<table>";
 		while($row = mysqli_fetch_array($content)) {
@@ -42,11 +42,13 @@ if(mysqli_connect_errno($con)) {
 				echo "<td>$row[location]</td>";
 				echo "<td>$row[time]</td>";
 				echo "<td>$row[creator]</td>";
-				echo "<td><button class=\"view_group  small blue\" value=\"$row[group_id]\">View Group</button></td>";
+				echo "<td><button class=\"view_group small blue\" value=\"$row[group_id]\">View Group</button></td>";
 				echo "</tr>";
 			}
+			echo "<tr><td>--$row[description]</td></tr>";
 			
 		}
+		echo "<tr><td>Don't like these groups?</td><td><button class=\"create_group small blue\">Create Group</button></td></tr>";
 		echo "</table>";
 	}
 }

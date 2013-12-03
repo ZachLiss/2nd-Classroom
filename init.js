@@ -62,6 +62,7 @@ function joinGroup(gid) {
 
 function viewCourse(cid) {
     console.log("viewing course cid: "+cid);
+    localStorage["currentCourse"] = cid;
     $("#main").html("<span id='titlespan'></span><span id='groupspan'></span><span id='userspan'></span>");
     $.get("getcourse.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         var courseArray = JSON.parse(data);
@@ -70,7 +71,6 @@ function viewCourse(cid) {
         courseData += "<p>"+courseArray["location"]+"</p>";
         courseData += "<p>"+courseArray["time"]+"</p></span></h1>";
         $("#titlespan").html(courseData);
-
     });
 
     $.get("getcoursegroups.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
@@ -152,7 +152,29 @@ function createCourse() {
 }
 
 function createGroup() {
+    var html = "<h5>Group Name</h5>";
+        html += "<input type=\"text\" id=\"group_name\">";
+       
+        html += "<h5>Description</h5>";
+        html += "<input type=\"text\" id=\"description\">";
 
+        html += "<h5>Location</h5>";
+        html += "<input type=\"text\" id=\"location\">";
+
+        html += "<h5>Time</h5>";
+        html += "<input type=\"text\" id=\"time\"><br>";
+        html += "<button id=\"submit_group\">Create Group</button>";
+
+    $("#main").html(html);
+
+    $("#submit_group").click(function() {
+        console.log("creategroup.php?username="+localStorage["username"]+"&group_name="+$("#group_name").val()+"&course_id="+localStorage["currentCourse"]+"&location="+$("#location").val()+"&description="+$("#description").val()+"&time="+$("#time").val()+"&creator="+localStorage["username"]);
+        $.get("creategroup.php?username="+localStorage["username"]+"&group_name="+$("#group_name").val()+"&course_id="+localStorage["currentCourse"]+"&location="+$("#location").val()+"&description="+$("#description").val()+"&time="+$("#time").val()+"&creator="+localStorage["username"], function(data, status) {
+            console.log(data);
+            var a = JSON.parse(data);
+            viewGroup(a['group_id']);
+        });
+    });
 
 }
 
