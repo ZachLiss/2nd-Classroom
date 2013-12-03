@@ -23,7 +23,7 @@ require_once('functions.php')
             //parse data into an array
             var courseArray = JSON.parse(data);
                         
-            var courseList = "<table><caption><h1>COURSES</h1><caption>";
+            var courseList = "<table>";
 
             console.log(courseArray);
             courseArray.forEach(function(course) {
@@ -37,11 +37,11 @@ require_once('functions.php')
 
         $.get("getusergroups.php?username="+localStorage['username'], function(data, status) {
             JSON.stringify(data);
-            // console.log(data);
+            console.log(data);
             //parse data into an array
             var groupArray = JSON.parse(data);
                         
-            var groupList = "<table><caption><h1>GROUPS</h1><caption>";
+            var groupList = "<table>";
 
             console.log(groupArray);
             groupArray.forEach(function(group) {
@@ -80,11 +80,16 @@ $grav_url = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $_SESSION
 		<center>
 		<span class="tooltip-bottom" title="Click to setup or edit your Gravatar image."><a href="https://en.gravatar.com/site/login"><img id= "photo" src="<?php echo $grav_url; ?>" alt="" /></a></span><br>
 		</center>
+        <div id="user_courses_title">
+        <table><caption><h1>COURSES</h1><caption></table>
+        </div>
 		<div id="user_courses">
 			<table id="courses">
 			</table>
 		</div>
-
+        <div id ="user_groups_title">
+        <table><caption><h1>GROUPS</h1><caption></table>
+        </div>
 		<div id="user_groups">
 			<table id="groups">
 			</table>

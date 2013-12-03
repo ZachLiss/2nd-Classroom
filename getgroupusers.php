@@ -13,7 +13,7 @@ if(mysqli_connect_errno($con)) {
 	$content = mysqli_query($con, "SELECT * 
 								   FROM (SELECT *
 								   		 FROM GROUPS_JOINED ct NATURAL JOIN USERS u
-								   		 WHERE group_id = $gid) as all_users");
+								   		 WHERE group_id = '$gid') as all_users");
 
 	$result = array();
 

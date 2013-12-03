@@ -25,7 +25,8 @@ if(mysqli_connect_errno($con)) {
 		//createa array for this course
 		$result = array('first_name' => $row["first_name"], 
 						'last_name' => $row["last_name"],
-		 				'email' => $row["email"]);
+		 				'email' => $row["email"],
+						'username' =>$row["username"]);
 			
 		//encode the array in javascript format
 		echo json_encode($result);

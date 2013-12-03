@@ -42,6 +42,10 @@ function setListeners() {
     $("body").on("click", ".create_group", function() {
         createGroup();
     });
+
+    $("body").on("click", ".friend_user", function() {
+        friendUser($(this).attr('value'));
+    });
 }
 
 function joinCourse(cid) {
@@ -96,8 +100,13 @@ function viewGroup(gid) {
 
     $.get("getgroupusers.php?gid="+gid+"&username="+localStorage["username"], function(data, status) {
         var a = JSON.parse(data);
-        var userData = "<h3>Users</h3>";
+        console.log(a);
+        var userData = "<h3>Users</h3><table>";
 
+        a.forEach(function(user){
+        userData += "<tr><td>"+user["first_name"]+" "+user["last_name"]+"</td><td>"+user["email"]+"</td><td><button class=\"view_user small blue\" value=\""+user["username"]+"\">View User</button></td></tr>";
+    });
+        userData += "</table>"
         $('#guserspan').html(userData);
     });
 }
@@ -110,6 +119,7 @@ function viewUser(username) {
         console.log(userArray);
         var userData = "<h1>"+userArray["first_name"]+" "+userArray["last_name"]+"</h1>";
         userData += "<h3><p>"+userArray["email"]+"<p></h3>";
+        userData += "<button class=\"friend_user small blue\" value=\""+userArray["username"]+"\">Bind With User</button>"
         $("#gtitlespan").html(userData);
     });
 }
@@ -143,6 +153,13 @@ function createCourse() {
 
 function createGroup() {
 
+
+}
+
+function friendUser(friend) {
+    $.get("frienduser.php?user="+localStorage["username"]+"&friend="+friend, function(data,status) {
+        console.log(data);
+    });
 }
 
 

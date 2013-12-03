@@ -1,3 +1,5 @@
+
+
 CREATE TABLE USERS(
 	first_name varchar(20),
 	last_name varchar(20),
@@ -67,7 +69,7 @@ CREATE TABLE NOTES(
 	note text,
 	thread_id varchar(10),
 	time datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	CONSTRAINT notes_pk PRIMARY KEY(note_id),
+	CONSTRAINT notes_pk PRIMARY KEY(note_id)
 
 );
 
@@ -76,8 +78,15 @@ CREATE TABLE THREADS(
 	group_id varchar(10),
 	title varchar(25),
 	subject varchar(50),
-	CONSTRAINT threads_pk PRIMARY KEY(thread_id),
+	CONSTRAINT threads_pk PRIMARY KEY(thread_id)
 
+);
+
+CREATE TABLE FRIENDS(
+	username varchar(10),
+	friendname varchar(10),
+	CONSTRAINT friends_pk PRIMARY KEY(username),
+	CONSTRAINT friends_fk1 FOREIGN KEY(friendname) REFERENCES USERS(username)
 );
 
 COMMIT;
