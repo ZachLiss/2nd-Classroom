@@ -1,7 +1,7 @@
 
 function setNavigation() {
 	$("#calendar").click(function() {
-		$("#main").load("calendar.php");
+		displayCalendar();
 	});
 
 	$("#search").click(function() {
@@ -128,4 +128,26 @@ function setSearch(){
   		});
   		
   	});
+}
+
+function displayCalendar(){
+	var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    $('#main').html('');
+    $('#main').fullCalendar({
+    	height: 500,
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+        },
+        defaultView: 'basicWeek',
+        editable: false,
+        firstDay: new Date().getDay(),
+        events: "events.php"
+    });
+        $('#main').prepend('<h1>CALENDAR</h1>');
+
 }

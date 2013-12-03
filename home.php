@@ -12,7 +12,10 @@ require_once('functions.php')
 	<script src="js/kickstart.js"></script>
         <script src="init.js"></script>
 	<script src="header.js"></script>
-
+    <link rel="stylesheet" href="http://arshaw.com/js/fullcalendar-1.6.1/fullcalendar/fullcalendar.css" type="text/css">
+    <script src="http://arshaw.com/js/fullcalendar-1.6.1/fullcalendar/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="style.css"  type="text/css" media="all">
+   
 	<script>
 	$(document).ready(function(){
 	   localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
