@@ -1,0 +1,45 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+	</script>
+	<script>
+	$(document).ready(function(){
+
+		//get the list of courses for the user
+		
+		$.get("getthreads.php?group_id=1", function(data, status) {
+			console.log(data);
+			//parse data into an array
+			var threadArray = JSON.parse(data);
+			var threadList = "";
+
+			console.log(threadArray);
+			threadArray.forEach(function(thread) {
+				threadList += "<p>Title: " + thread["title"] + "</p>";
+				threadList += "Subject: " + thread["subject"] + "<hr>";
+				
+			});
+
+			
+			$("#gThreads").html(threadList);
+			$("#gThreads").append(buttontext);
+		});
+
+
+
+
+	});
+	</script>
+	</head>
+	<body>
+
+		<h3>Threads for group 1</h3>
+		<span id="gThreads"></span>
+
+
+
+		<br>
+		<br>
+
+	</body>
+</html>
