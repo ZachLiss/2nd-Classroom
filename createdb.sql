@@ -65,12 +65,20 @@ CREATE TABLE NOTES(
 	group_id varchar(10),
 	title varchar(50),
 	note text,
+	thread_id varchar(10),
 	time datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	CONSTRAINT notes_pk PRIMARY KEY(note_id),
-	CONSTRAINT notes_fk1 FOREIGN KEY(poster) REFERENCES USERS(username),
-	CONSTRAINT notes_fk2 FOREIGN KEY(group_id) REFERENCES GROUPS(group_id)
+
 );
 
+CREATE TABLE THREADS(
+	thread_id int NOT NULL AUTO_INCREMENT,
+	group_id varchar(10),
+	title varchar(25),
+	subject varchar(50),
+	CONSTRAINT threads_pk PRIMARY KEY(thread_id),
 
+);
 
 COMMIT;
+
