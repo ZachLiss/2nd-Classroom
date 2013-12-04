@@ -8,10 +8,10 @@ if(mysqli_connect_errno($con)) {
 } else {
 
 	//get username and initialize a new empty array to return
-	$id = $_GET["id"];
+	$id = $_GET["note_id"];
 
 	//grab the courses that $username is taking
-	$content = mysqli_query($con, "SELECT poster, note FROM NOTES WHERE NOTES.note_id = '$id'");
+	$content = mysqli_query($con, "SELECT COURSES.course_name, NOTES.title, NOTES.time, NOTES.note FROM NOTES, COURSES WHERE NOTES.note_id = '$id' and NOTES.course_id = COURSES.course_id");
 
 
 	if(!$content) {
@@ -19,7 +19,11 @@ if(mysqli_connect_errno($con)) {
 		} else if(mysqli_num_rows($content) > 0) {
 
 			$result = mysqli_fetch_array($content);
-			$arr = array('poster' =>$result["poster"], 'note' => $result["note"]);
+			$arr = array('course_name' =>$result["course_name"],
+						 'title' => $result["title"], 
+						 'time' => $result["time"], 
+						 'note' => $result["note"]
+						 );
 
 
 			//encode the array in javascript format

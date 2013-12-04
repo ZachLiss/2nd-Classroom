@@ -132,29 +132,65 @@ function setSearch(){
 
 
 function getNotes () {
+    $("#main").html("<span id='gtitlespan'></span><span id='notespan'></span>");
+    $("#gtitlespan").html("<h1>Notes</h1>");
     $.get("getusercourses.php?username="+localStorage['username'], function(data, status) {
         var courseArray = JSON.parse(data);
         var notesList = "<table>";
         courseArray.forEach(function(course) {
-            notesList += "<tr class= \"viewCourseNotes\" value=\""+course["course_id"]+"\"><td><h1>"+course["course_num"]+": "+course["course_name"]+"</h1></td></tr>";
+            notesList += "<tr class= \"viewCourseNotes\" value=\""+course["course_id"]+"\"><td><h3>"+course["course_num"]+": "+course["course_name"]+"</h3></td></tr>";
         });
         notesList += "</table>";        
-        $("#main").html(notesList);
+        $("#notespan").html(notesList);
     });
 }
 
 function getCourseNotes (course_id) {
+
      $.get("getnotes.php?username="+localStorage['username']+"&course_id="+course_id, function(data, status) {
                 var notesArray = JSON.parse(data);
                 var notesList = "<table>"
                 notesArray.forEach(function(note) {
                     console.log(note);
-                    notesList += "<tr><td>"+note["title"]+"</td><td>"+note["time"]+"</td></tr>";
+                    notesList += "<tr class= \"viewNote\" value=\""+note["note_id"]+"\"><td>"+note["title"]+"</td><td>"+note["time"]+"</td></tr>";
                 });
+                notesList += "<tr class= \"newNote\" value=\""+course_id+"\"><td>New Note</td></tr>";
                 notesList += "</table>";
-                $("#main").html(notesList);
+                $("#notespan").html(notesList);
             });
 }
+
+function getNote (note_id) {
+ $.get("getnote.php?note_id="+note_id, function(data, status) {
+                var note = JSON.parse(data);
+                var title = "<h1>"+note["course_name"]+"</h1>";
+                    title += "<h3>"+note["title"];
+                    title += "<p>"+note["time"]+"</p></h3>";
+                $("#gtitlespan").html(title);
+
+                var content = "<h4>"+note["note"]+"</h4>";
+                $("#notespan").html(content);
+
+            });
+}
+
+function newNote (course_id) {
+    $("#gtitlespan").html("<h1>New Note</h1>");
+    var form = " <h3><input type=\"text\" id=\"title\" placeholder=\"Title\"><br>";
+        form += "<textarea rows=\"4\" cols=\"50\" id =\"noteTxt\" placeholder=\"Write your note here.\"></textarea>";
+        form += "<br><button id=\"postNote\">Post Note</button>";
+        $("#notespan").html(form);
+
+        $("#postNote").click(function(){
+            var temp = $("#noteTxt").val();
+            var note = temp.replace(/\r\n|\r|\n/g,"<br />");
+            $.get("postnote.php?title=" + $("#title").val() + "&note=" + note + "&course_id=" + course_id, function(data, status) {
+                getNotes();
+            });
+        });
+
+}
+
 
 function displayCalendar(){
 	var date = new Date();
