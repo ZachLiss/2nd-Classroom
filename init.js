@@ -77,12 +77,14 @@ function joinCourse(cid) {
 	console.log("joining course cid: "+cid);
     $.get("joincourse.php?cid="+cid+"&username="+localStorage["username"]);
     viewCourse(cid);
+    userBarReload();
 }
 
 function joinGroup(gid) {
     console.log("joining group gid: "+gid);
     $.get("joingroup.php?gid="+gid+"&username="+localStorage["username"]);
     viewGroup(gid);
+    userBarReload();
 }
 
 function viewCourse(cid) {
@@ -91,8 +93,8 @@ function viewCourse(cid) {
     $("#main").html("<span id='titlespan'></span><span id='groupspan'></span><span id='userspan'></span>");
     $.get("getcourse.php?cid="+cid+"&username="+localStorage["username"], function(data,status) {
         var courseArray = JSON.parse(data);
-        var courseData = "<h1>"+courseArray["course_num"]+" <span>"+courseArray["course_name"];
-        courseData += "<p>"+courseArray["instructor"]+"</p>";
+        var courseData = "<h1>"+courseArray["course_num"]+" <span>:</span> "+courseArray["course_name"];
+        courseData += "<span><p>"+courseArray["instructor"]+"</p>";
         courseData += "<p>"+courseArray["location"]+"</p>";
         courseData += "<p>"+courseArray["start_time"]+"</p></span></h1>";
         $("#titlespan").html(courseData);
@@ -117,11 +119,11 @@ function viewGroup(gid) {
     $.get("getgroup.php?gid="+gid, function(data,status) {
         var groupArray = JSON.parse(data);
         console.log(groupArray);
-        var groupData = "<h1>"+groupArray["group_name"]+"</h1>";
-        groupData += "<h3><p>"+groupArray["course_num"]+" "+groupArray["course_name"]+"<p>";
+        var groupData = "<h1>"+groupArray["group_name"];
+        groupData += "<span><p>"+groupArray["course_num"]+" "+groupArray["course_name"]+"<p>";
         groupData += "<p>"+groupArray["description"]+"</p>";
         groupData += "<p>"+groupArray["location"]+"</p>";
-        groupData += "<p>"+groupArray["time"]+"</p></h3>";
+        groupData += "<p>"+groupArray["time"]+"</p></span></h1>";
         $("#gtitlespan").html(groupData);
     });
 
@@ -186,6 +188,7 @@ function createCourse() {
             console.log(data);
             var a = JSON.parse(data);
             viewCourse(a['course_id']);
+            userBarReload();
         });
     });
 }
@@ -212,6 +215,7 @@ function createGroup() {
             console.log(data);
             var a = JSON.parse(data);
             viewGroup(a['group_id']);
+            userBarReload();
         });
     });
 
