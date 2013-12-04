@@ -105,7 +105,7 @@ function viewGroup(gid) {
     console.log("view group gid: "+gid);
     localStorage["currentGroup"] = gid;
     console.log("view group gid: "+gid);
-    $("#main").html("<span id='gtitlespan'></span><span id='guserspan'></span><span id='threadspan'></span>");
+    $("#main").html("<span id='gtitlespan'></span><span id='guserspan'></span><span id='newtspan'></span>");
 
     $.get("getgroup.php?gid="+gid, function(data,status) {
         var groupArray = JSON.parse(data);
@@ -129,6 +129,10 @@ function viewGroup(gid) {
         userData += "</table>"
         $('#guserspan').html(userData);
     });
+
+    var newSpanList = "";
+    newSpanList += "<td><button class=\"new_thread small blue\" value=\""+gid+"\">Create New Thread</button></td></tr><hr>";
+    $("#newtspan").html(newSpanList);
 
     setInterval( function () {
         $.get("getthreads.php?group_id="+gid, function(data, status) {
