@@ -105,7 +105,7 @@ function viewGroup(gid) {
     console.log("view group gid: "+gid);
     localStorage["currentGroup"] = gid;
     console.log("view group gid: "+gid);
-    $("#main").html("<span id='gtitlespan'></span><span id='guserspan'></span><span id='newtspan'></span>");
+    $("#main").html("<span id='gtitlespan'></span><span id='guserspan'></span><span id='newtspan'></span><span id='threadspan'></span>");
 
     $.get("getgroup.php?gid="+gid, function(data,status) {
         var groupArray = JSON.parse(data);
