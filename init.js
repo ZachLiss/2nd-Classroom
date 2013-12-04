@@ -275,7 +275,7 @@ function NewThread(){
     threadEntry += "<h3><p>Title</p>"
     threadEntry += "<input type=\"text\" id=\"tit\"/>"
     threadEntry += "<p>Subject</p>"
-    threadEntry += "<input type=\"text\" size=\"25\" id=\"sub\"/><br>"
+    threadEntry += "<input type=\"text\" size=\"50\" id=\"sub\"/><br>"
     threadEntry += "<button class=\"Submit_Thread\">Add Thread</button></h3>"
     $("#newtspan").html(threadEntry);
 }
