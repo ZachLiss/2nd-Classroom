@@ -11,7 +11,7 @@ if(mysqli_connect_errno($con)) {
 	$id = $_GET["id"];
 	
 	//grab the courses that $username is taking
-	$content = mysqli_query($con, "SELECT sender, message FROM MESSAGES WHERE MESSAGES.message_id = '$id'");
+	$content = mysqli_query($con, "SELECT USERS.first_name, USERS.last_name, MESSAGES.message FROM MESSAGES, USERS WHERE MESSAGES.message_id = '$id' and MESSAGES.sender = USERS.username");
 
 	
 	if(!$content) {
@@ -19,7 +19,8 @@ if(mysqli_connect_errno($con)) {
 		} else if(mysqli_num_rows($content) > 0) {
 			
 			$result = mysqli_fetch_array($content);
-			$arr = array('sender' =>$result["sender"], 'message' => $result["message"]);
+			$arr = array('sender' =>$result["first_name"]." ".$result["last_name"],
+						 'message' => $result["message"]);
 
 
 			//encode the array in javascript format
