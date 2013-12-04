@@ -10,7 +10,7 @@ if(mysqli_connect_errno($con)) {
 	$note = $_GET["note"];
 	$course_id = $_GET["course_id"];
 	//find if class exists
-	$content = mysqli_query($con, "INSERT INTO NOTES (user, title, note, course_id ) VALUES ('$poster', '$title', '$note', '$group_id')");
+	$content = mysqli_query($con, "INSERT INTO NOTES (user, title, note, course_id ) VALUES ('$poster', '$title', '$note', '$course_id')");
 	}
 
 ?>

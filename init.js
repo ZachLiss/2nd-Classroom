@@ -50,6 +50,14 @@ function setListeners() {
         getCourseNotes($(this).attr('value'));
     });
 
+    $("body").on("click", ".viewNote", function() {
+        getNote($(this).attr('value'));
+    });
+
+    $("body").on("click", ".newNote", function() {
+        newNote($(this).attr('value'));
+    });
+
     $("body").on("click", ".show_thread", function() {
         showThread($(this).attr('value'));
 

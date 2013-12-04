@@ -15,7 +15,7 @@ if(mysqli_connect_errno($con)) {
 	
 	//grab the courses that $username is taking
 	
-	$content = mysqli_query($con, "SELECT NOTES.note_id, NOTES.title, NOTES.time FROM NOTES WHERE NOTES.course_id = '$course_id' and NOTES.user = '$user' ORDER BY time DESC");
+	$content = mysqli_query($con, "SELECT COURSES.course_name, NOTES.note_id, NOTES.title, NOTES.time FROM NOTES, COURSES WHERE COURSES.course_id = '$course_id' and NOTES.course_id = '$course_id' and NOTES.user = '$user' ORDER BY time DESC");
 	
 	
 
@@ -29,7 +29,7 @@ if(mysqli_connect_errno($con)) {
 				
 				$time = $row["time"];
 				//create array for this course
-				$arr = array('note_id' => $row["note_id"], 'title' => $row["title"], 'time' => $time);
+				$arr = array('course_name' => $row["course_name"], 'note_id' => $row["note_id"], 'title' => $row["title"], 'time' => $time);
 
 				//push this array into the result
 				array_push($result, $arr);
