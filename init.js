@@ -133,22 +133,7 @@ function viewGroup(gid) {
     newSpanList += "<td><button class=\"new_thread small blue\" value=\""+gid+"\">Create New Thread</button></td></tr><hr>";
     $("#newtspan").html(newSpanList);
 
-    setInterval( function () {
-        $.get("getthreads.php?group_id="+gid, function(data, status) {
-            console.log(data);
-            //parse data into an array
-        
-            var threadArray = JSON.parse(data);
-            var threadList = "";
-            console.log(threadArray);
-            threadArray.forEach(function(thread) {
-                threadList += "<h3>Title: " + thread["title"] + "<br>";
-                threadList += "Subject: " + thread["subject"] + "<br>";
-                threadList += "<td><button class=\"show_thread small blue\" value=\""+thread["thread_id"]+"\">View Thread</button></td></tr></h3>"; 
-            });    
-            $("#threadspan").html(threadList);
-        });
-    }, 1000);
+   loadThreads(gid);
 }
 
 
@@ -286,8 +271,29 @@ function SubmitThread(gid){
     var SpanList = "";
     SpanList += "<td><button class=\"new_thread small blue\" value=\""+gid+"\">Create New Thread</button></td></tr><hr>";
     $("#newtspan").html(SpanList);
+    
+    loadThreads(gid);
 }
 
+function loadThreads(gid) {
+			$.get("getthreads.php?group_id="+gid, function(data, status) {
+			console.log(data);
+			//parse data into an array
+			
+			var threadArray = JSON.parse(data);
+			var threadList = "";
+			console.log(threadArray);
+			threadArray.forEach(function(thread) {
+			threadList += "<h3>Title: " + thread["title"] + "<br>";
+			threadList += "Subject: " + thread["subject"] + "<br>";
+			threadList += "<td><button class=\"show_thread small blue\" value=\""+thread["thread_id"]+"\">View Thread</button></td></tr></h3>";	
+			});
+			
+			$("#threadspan").html(threadList);
+		});
+
+
+}
 
 
 
