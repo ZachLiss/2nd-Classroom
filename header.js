@@ -13,7 +13,7 @@ function setNavigation() {
 	});
 
 	$("#notes").click(function() {
-		$("#main").load("notes.php");
+		getNotes();
 	});
 
 	$("#settings").click(function() {
@@ -130,6 +130,32 @@ function setSearch(){
   	});
 }
 
+
+function getNotes () {
+    $.get("getusercourses.php?username="+localStorage['username'], function(data, status) {
+        var courseArray = JSON.parse(data);
+        var notesList = "<table>";
+        courseArray.forEach(function(course) {
+            notesList += "<tr class= \"viewCourseNotes\" value=\""+course["course_id"]+"\"><td><h1>"+course["course_num"]+": "+course["course_name"]+"</h1></td></tr>";
+        });
+        notesList += "</table>";        
+        $("#main").html(notesList);
+    });
+}
+
+function getCourseNotes (course_id) {
+     $.get("getnotes.php?username="+localStorage['username']+"&course_id="+course_id, function(data, status) {
+                var notesArray = JSON.parse(data);
+                var notesList = "<table>"
+                notesArray.forEach(function(note) {
+                    console.log(note);
+                    notesList += "<tr><td>"+note["title"]+"</td><td>"+note["time"]+"</td></tr>";
+                });
+                notesList += "</table>";
+                $("#main").html(notesList);
+            });
+}
+
 function displayCalendar(){
 	var date = new Date();
     var d = date.getDate();
@@ -145,8 +171,19 @@ function displayCalendar(){
         },
         defaultView: 'basicWeek',
         editable: false,
-        firstDay: new Date().getDay(),
-        events: "events.php"
+
+        eventSources: [
+
+        // your event source
+        {
+            url: 'events.php', // use the `url` property
+            color: 'green',    // an option!
+            textColor: 'black'  // an option!
+        }
+
+        // any other sources...
+
+    ]
     });
         $('#main').prepend('<h1>CALENDAR</h1>');
 

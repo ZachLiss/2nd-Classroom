@@ -9,13 +9,16 @@ require_once('functions.php')
 	<link rel="stylesheet" href="style.css"  type="text/css" media="all">
 	<link rel="shortcut icon" type="image/ico" href="images/icon.ico">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"  type="text/css" media="all">
+    <link rel="stylesheet" href="css/timepicker.css"  type="text/css" media="all">
 	<script src="js/kickstart.js"></script>
-        <script src="init.js"></script>
+    <script src="init.js"></script>
 	<script src="header.js"></script>
     <link rel="stylesheet" href="http://arshaw.com/js/fullcalendar-1.6.1/fullcalendar/fullcalendar.css" type="text/css">
     <script src="http://arshaw.com/js/fullcalendar-1.6.1/fullcalendar/fullcalendar.min.js"></script>
     <link rel="stylesheet" href="style.css"  type="text/css" media="all">
-   
+    <script src="js/timepicker.js"></script>
 	<script>
 	$(document).ready(function(){
 	   localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
@@ -57,7 +60,7 @@ require_once('functions.php')
         });
         
         setNavigation();
-     $("#main").load("calendar.php");
+     displayCalendar();
     });
 
 	</script>

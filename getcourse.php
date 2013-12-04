@@ -27,7 +27,8 @@ if(mysqli_connect_errno($con)) {
 						'course_name' => $row["course_name"], 
 						'instructor' => $row["instructor"], 
 						'location' => $row["location"], 
-						'time' => $row["time"]);
+						'start_time' => $row["start_time"],
+						 'end_time' => $row["end_time"]);
 			
 		//encode the array in javascript format
 		echo json_encode($result);

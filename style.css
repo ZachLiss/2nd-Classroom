@@ -25,6 +25,7 @@ h2{
 	color:black;
 }
 
+
 thead th,
 tbody th{
 font-family: "Arimo", arial, verdana, sans-serif;
@@ -277,6 +278,7 @@ overflow: auto;
 	letter-spacing:3px;
 	background-color: black;
 	padding: 5;
+	border: 0;
 }
 
 #main h1 input{padding:0;}
@@ -292,6 +294,18 @@ overflow: auto;
 	border-top:2px solid black;
 }
 
+#main h4 {
+	font-size: 1em;
+	color: black;
+	letter-spacing:3px;
+
+	padding:0;
+	margin-top: 0px;
+	border-bottom:2px solid black;
+	border-top:2px solid black;
+}
+}
+
 #main p {margin-top: 0px;}
 
 #main span {color:white}
@@ -303,4 +317,27 @@ overflow: auto;
 #user_courses {
 max-height: 40%;
 overflow: auto;
+}
+
+#main .fc-button{
+color: black;
+}
+
+#main .fc-text-arrow{
+color: black;
+}
+
+#main td {padding: 7px 10px;}
+
+#tspan {
+position: relative;
+overflow: auto;
+height: 90%;
+}
+
+#postspan {
+position: relative;
+width: 100%;
+height: 10%;
+
 }

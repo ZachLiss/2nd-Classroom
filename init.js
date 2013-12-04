@@ -46,6 +46,24 @@ function setListeners() {
     $("body").on("click", ".friend_user", function() {
         friendUser($(this).attr('value'));
     });
+
+    $("body").on("click", ".viewCourseNotes", function() {
+        getCourseNotes($(this).attr('value'));
+    });
+
+    $("body").on("click", ".show_thread", function() {
+        showThread($(this).attr('value'));
+
+    });
+    
+    $("body").on("click", ".new_thread", function() {
+        NewThread();    
+    });
+
+    $("body").on("click", ".Submit_Thread", function() {
+        SubmitThread(localStorage["currentGroup"]); 
+    });
+    
 }
 
 function joinCourse(cid) {
@@ -69,7 +87,7 @@ function viewCourse(cid) {
         var courseData = "<h1>"+courseArray["course_num"]+" <span>"+courseArray["course_name"];
         courseData += "<p>"+courseArray["instructor"]+"</p>";
         courseData += "<p>"+courseArray["location"]+"</p>";
-        courseData += "<p>"+courseArray["time"]+"</p></span></h1>";
+        courseData += "<p>"+courseArray["start_time"]+"</p></span></h1>";
         $("#titlespan").html(courseData);
     });
 
@@ -85,7 +103,9 @@ function viewCourse(cid) {
 
 function viewGroup(gid) {
     console.log("view group gid: "+gid);
-    $("#main").html("<span id='gtitlespan'></span><span id='guserspan'></span>");
+    localStorage["currentGroup"] = gid;
+    console.log("view group gid: "+gid);
+    $("#main").html("<span id='gtitlespan'></span><span id='guserspan'></span><span id='threadspan'></span>");
 
     $.get("getgroup.php?gid="+gid, function(data,status) {
         var groupArray = JSON.parse(data);
@@ -109,7 +129,25 @@ function viewGroup(gid) {
         userData += "</table>"
         $('#guserspan').html(userData);
     });
+
+    setInterval( function () {
+        $.get("getthreads.php?group_id="+gid, function(data, status) {
+            console.log(data);
+            //parse data into an array
+        
+            var threadArray = JSON.parse(data);
+            var threadList = "";
+            console.log(threadArray);
+            threadArray.forEach(function(thread) {
+                threadList += "<h3>Title: " + thread["title"] + "<br>";
+                threadList += "Subject: " + thread["subject"] + "<br>";
+                threadList += "<td><button class=\"show_thread small blue\" value=\""+thread["thread_id"]+"\">View Thread</button></td></tr></h3>"; 
+            });    
+            $("#threadspan").html(threadList);
+        });
+    }, 1000);
 }
+
 
 function viewUser(username) {
 	$("#main").html("<span id='gtitlespan'></span>");
@@ -135,15 +173,20 @@ function createCourse() {
         html += "<input type=\"text\" id=\"ta\">";
         html += "<h5>Location</h5>";
         html += "<input type=\"text\" id=\"location\">";
-        html += "<h5>Time</h5>";
-        html += "<input type=\"text\" id=\"time\"><br>";
+        html += "<h5>Start Time</h5>";
+        html += "<input type=\"text\" id=\"start_time\"><br>";
+        html += "<h5>End Time</h5>";
+        html += "<input type=\"text\" id=\"end_time\"><br>";
         html += "<button id=\"submit_class\">Create Class</button>";
 
     $("#main").html(html);
+    $('#start_time').datetimepicker();
+    $('#end_time').datetimepicker();
 
     $("#submit_class").click(function() {
-        console.log("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&time="+$("#time").val());
-        $.get("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&time="+$("#time").val(), function(data, status) {
+        var start = $("#start_time").val();
+        console.log("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&start_time="+$("#start_time").val()+"&end_time="+$("#end_time").val());
+        $.get("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&start_time="+start+"&end_time="+$("#end_time").val(), function(data, status) {
             console.log(data);
             var a = JSON.parse(data);
             viewCourse(a['course_id']);
@@ -183,6 +226,66 @@ function friendUser(friend) {
         console.log(data);
     });
 }
+
+function showThread(thread_id) {
+
+    $("#main").html("<div id = 'tspan'></div><div id = 'postspan'></div>");
+    console.log(thread_id + "this is it");
+    
+    setInterval(function() {
+        $.get("getthreadmessages.php?thread_id=" + thread_id, function(data, status) {
+            console.log(data);
+            //parse data into an array
+            var messageArray = JSON.parse(data);
+            var messageList = "";
+
+            console.log(messageArray);
+            messageArray.forEach(function(message) {
+                messageList += "<h4><p>User " + message["username"] + "</p>";
+                messageList += "<p>Said: " + message["content"] + "</p>";
+                messageList += "<p>On " + message["time"] + "</p></h4>";
+            });
+    
+            $("#tspan").html(messageList);
+        });
+    }, 1000);
+    var postList = "";
+    postList += "<h3>"
+    postList += "<input type='text' size=\"100\" id =\"txt\">"
+    postList += "<button class=\"Post_Thread\">Post to Thread</button></h3>"
+    $("#postspan").html(postList);
+
+
+    $(".Post_Thread").click(function() {
+        $.get("addthreadmessage.php?thread_id=" +thread_id + "&content=" + $("#txt").val() + "&username=" + localStorage["username"]);
+        console.log("message submitted");
+        var div = $("#tspan")
+        var height = div[0].scrollHeight;
+        div.scrollTop(height);
+    });
+
+}
+
+
+function NewThread(){
+    var threadEntry = "";
+    threadEntry += "<h3><p>Title</p>"
+    threadEntry += "<input type=\"text\" id=\"tit\"/>"
+    threadEntry += "<p>Subject</p>"
+    threadEntry += "<input type=\"text\" id=\"sub\"/><br>"
+    threadEntry += "<button class=\"Submit_Thread\">Add Thread</button></h3>"
+    $("#newtspan").html(threadEntry);
+}
+
+function SubmitThread(gid){
+    $.get("addthread.php?group_id=" + gid + "&title=" + $("#tit").val() + "&subject=" + $("#sub").val());
+            
+    var SpanList = "";
+    SpanList += "<td><button class=\"new_thread small blue\" value=\""+gid+"\">Create New Thread</button></td></tr><hr>";
+    $("#newtspan").html(SpanList);
+}
+
+
 
 
 

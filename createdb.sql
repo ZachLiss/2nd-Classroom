@@ -84,10 +84,10 @@ CREATE TABLE THREADS(
 CREATE TABLE FRIENDS(
 	username varchar(10),
 	friendname varchar(10),
-	CONSTRAINT friends_pk PRIMARY KEY(username),
 	CONSTRAINT friends_fk1 FOREIGN KEY(friendname) REFERENCES USERS(username)
 );
-CREATE TABLE THREADMESSAGE(
+
+CREATE TABLE THREADMESSAGES(
 	message_id int NOT NULL AUTO_INCREMENT,
 	thread_id varchar(10),
 	content text,

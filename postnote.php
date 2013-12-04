@@ -8,9 +8,9 @@ if(mysqli_connect_errno($con)) {
 	$poster = $_SESSION["username"];
 	$title = $_GET["title"];
 	$note = $_GET["note"];
-	$group_id = $_GET["group_id"];
+	$course_id = $_GET["course_id"];
 	//find if class exists
-	$content = mysqli_query($con, "INSERT INTO NOTES (poster, title, note, group_id ) VALUES ('$poster', '$title', '$note', '$group_id')");
+	$content = mysqli_query($con, "INSERT INTO NOTES (user, title, note, course_id ) VALUES ('$poster', '$title', '$note', '$group_id')");
 	}
 
 ?>

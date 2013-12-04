@@ -30,7 +30,8 @@ if(mysqli_connect_errno($con)) {
 						 'course_num' => $row["course_num"],
 						 'course_name' => $row["course_name"],
 						 'location' => $row["location"],
-						 'time' => $row["time"]);
+						 'start_time' => $row["start_time"],
+						 'end_time' => $row["end_time"]);
 			
 			//push this array into the result
 			array_push($result, $arr);
