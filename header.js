@@ -74,47 +74,47 @@ function get_messages() {
     		$.get("getmessage.php?id="+ $(this).attr('value'), function(data, status){
     			console.log(data);
     			var message = JSON.parse(data);
-    			var output = "<b>From:</b>"+message['sender'];
-    			output	+= "<br>"+nl2br(message['message']);
+    			var output = "<b>From: </b>"+message['sender'];
+    			output	+= "<hr>"+nl2br(message['message']);
 
-    			//$("#mailbox").html(output);
     			$("#message").html(output);
     		});
 			
 		});
 
 		$("#new_message").click(function() {
+            $.get("getuserfriends.php?username="+localStorage["username"], function(data, status){
+                var friends = JSON.parse(data);
+                var output = "<table><tr><td>To:</td><td><select id='message_to'>";
+                output += "<option value = NULL>--Choose Recipient--</option>";
+                friends.forEach(function(friend) {
+                    output += "<option value = \""+friend["username"]+"\">"+friend["name"]+"</option>";
+                });
 
-    			var output = "<table><tr><td>To:</td><td><input type='text' id='message_to' placeholder='username' size='20'></td></tr>";
-    			output 	+= "<tr><td>Subject:</td><td><input type='text' id='message_subject' placeholder='subject' size='70'></td></tr>";
-    			output	+= "<tr><td></td><td><textarea id='message_body' placeholder='Type your message here' rows='40' cols='60'></textarea></td></tr>";
-    			output	+= "<tr><td></td><td><button id='send_message'>Send</button></td></tr></table>";
-
-
-    			//$("#mailbox").html(output);
-    			$("#message").html(output);
+                output += "</select></td></tr>";
+    		    output 	+= "<tr><td>Subject:</td><td><input type='text' id='message_subject' placeholder='subject' size='70'></td></tr>";
+    		    output	+= "<tr><td></td><td><textarea id='message_body' placeholder='Type your message here' rows='40' cols='60'></textarea>";
+    		    output	+= "<button id='send_message'>Send</button></td></tr></table>";
+                
+                $("#message").html(output);
     			$("#message_body").css('white-space', 'pre');
 			
-$("#send_message").click(function(){
-		var recipient= $("#message_to").val();
-		console.log($("#message_to").val());
-		var subject= $("#message_subject").val();
-		var body = $("#message_body").val();
-			console.log(body);
-		var message = body.replace(/\r\n|\r|\n/g,"<br />");
-			console.log(message);
-		$.get("sendmessage.php?recipient="+recipient+"&subject="+subject+"&message="+message, function(data, status){
-    		var output = "Message Sent!";
-    		//$("#mailbox").html(output);
-    		$("#message").html(output);
-    		});
+                $("#send_message").click(function(){
+                    var recipient= $("#message_to").val();
+                    console.log($("#message_to").val());
+                    var subject= $("#message_subject").val();
+                    var body = $("#message_body").val();
+                    console.log(body);
+                    var message = body.replace(/\r\n|\r|\n/g,"<br />");
+        			console.log(message);
+                    $.get("sendmessage.php?recipient="+recipient+"&subject="+subject+"&message="+message, function(data, status){
+                        var output = "Message Sent!";
+                        $("#message").html(output);
+                    });
+                });
+            });
 		});
-
-		});
-		
 	});
-
-
 }
 
 function setSearch(){
