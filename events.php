@@ -22,17 +22,31 @@ if(mysqli_connect_errno($con)) {
 	} else if(mysqli_num_rows($content) > 0) {
 			
 		while($row = mysqli_fetch_array($content)) {
-
+			$start_date = strtotime($row["start_time"]);
+			$end_date = strtotime($row["end_time"]);
 			//createa array for this course
 			$arr = array('id' => $row["course_id"],
 						 'title' => $row["course_name"],
-						 'start' => $row["start_time"],
-						 'end' => $row["end_time"],
+						 'start' => $start_date,
+						 'end' => $end_date,
 						 'allDay' => false
 						 );
-			
 			//push this array into the result
 			array_push($result, $arr);
+
+			for ( $i = 1; $i<9; $i++){
+				$start_date= strtotime('+1 week', $start_date);
+				$end_date= strtotime('+1 week', $end_date);
+				$arr = array('id' => $row["course_id"],
+						 	 'title' => $row["course_name"],
+							 'start' => $start_date,
+							 'end' => $end_date,
+							 'allDay' => false
+							 );
+			
+				//push this array into the result
+				array_push($result, $arr);
+			}
 		}
 
 		//encode the array in javascript format
