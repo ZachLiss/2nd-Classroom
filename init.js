@@ -345,6 +345,9 @@ function showThread(thread_id) {
     console.log(thread_id + "this is it");
     
     setInterval(function() {
+        var div = $("#tspan");
+        var height = div[0].scrollHeight;
+        div.scrollTop(height);
         $.get("getthreadmessages.php?thread_id=" + thread_id, function(data, status) {
             console.log(data);
             //parse data into an array
@@ -371,9 +374,8 @@ function showThread(thread_id) {
     $(".Post_Thread").click(function() {
         $.get("addthreadmessage.php?thread_id=" +thread_id + "&content=" + $("#txt").val() + "&username=" + localStorage["username"]);
         console.log("message submitted");
-        var div = $("#tspan")
-        var height = div[0].scrollHeight;
-        div.scrollTop(height);
+        $("#txt").val("");
+
     });
 
 }
