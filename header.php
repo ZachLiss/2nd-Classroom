@@ -12,7 +12,7 @@
 	<a id="messages" class="tooltip-bottom" title="Messages"><i class="icon-envelope icon-2x nav_but" style="color: #86dc00"></i></a>&nbsp;&nbsp;
 	<a id= "notes" class="tooltip-bottom" title="Notes"><i class="icon-edit icon-2x nav_but" style="color: #86dc00"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-
+	<a id= "help" class="tooltip-bottom" title="Help"><i class="icon-ambulance icon-2x nav_but" style="color: #86dc00"></i></a>&nbsp;&nbsp;
 	<a href="process.php?log_out=1" class="tooltip-bottom" title="Log Out"><i class="icon-signout icon-2x nav_but" style="color: #86dc00"></i></a>
 	</div>
 	<?php } ?>
