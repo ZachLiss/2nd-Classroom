@@ -22,7 +22,7 @@ if(mysqli_connect_errno($con)) {
 
 		if(!$content) {
 			echo "bad query";
-		} else if(mysqli_num_rows($content) > 0) {
+		} else {
 			echo "<h3>Courses:</h3>";
 			echo "<table>";
 			while($row = mysqli_fetch_array($content)) {
