@@ -319,6 +319,11 @@ max-height: 40%;
 overflow: auto;
 }
 
+#user_groups {
+
+overflow: auto;
+}
+
 #main .fc-button{
 color: black;
 }

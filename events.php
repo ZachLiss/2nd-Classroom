@@ -20,7 +20,7 @@ if(mysqli_connect_errno($con)) {
 	if(!$content) {
 		echo "bad query";
 	} else if(mysqli_num_rows($content) > 0) {
-			
+			date_default_timezone_set('America/New_York');
 		while($row = mysqli_fetch_array($content)) {
 			$start_date = strtotime($row["start_time"]);
 			$end_date = strtotime($row["end_time"]);

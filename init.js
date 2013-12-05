@@ -124,7 +124,7 @@ function viewCourse(cid) {
         var courseData = "<h1>"+courseArray["course_num"]+" <span>:</span> "+courseArray["course_name"];
         courseData += "<span><p>"+courseArray["instructor"]+"</p>";
         courseData += "<p>"+courseArray["location"]+"</p>";
-        courseData += "<p>"+courseArray["start_time"]+"</p></span></h1>";
+        courseData += "<p>"+courseArray["start_time"]+" "+courseArray["days"]+"</p></span></h1>";
         $("#titlespan").html(courseData);
     });
 
@@ -140,21 +140,16 @@ function viewCourse(cid) {
 
 
 function createCourse() {
-    var html = "<h5>Course Number -- Course Name</h5>";
-        html += "<input type=\"text\" id=\"course_num\">";
-        html += "<input type=\"text\" id=\"course_name\">";
-        html += "<h5>Instructor</h5>";
-        html += "<input type=\"text\" id=\"instructor\">";
-        html += "<h5>TA</h5>";
-        html += "<input type=\"text\" id=\"ta\">";
-        html += "<h5>Location</h5>";
-        html += "<input type=\"text\" id=\"location\">";
-        html += "<h5>First Class Date</h5>";
-        html += "<input type=\"text\" id=\"start_date\"><br>";
-        html += "<h5>Start Time</h5>";
-        html += "<input type=\"text\" id=\"start_time\"><br>";
-        html += "<h5>End Time</h5>";
-        html += "<input type=\"text\" id=\"end_time\"><br>";
+    var html = "<span><h1>Create Class</h1></span>";
+        html += "<input type=\"text\" id=\"course_num\" placeholder=\"Course #\">";
+        html += "<input type=\"text\" id=\"course_name\" placeholder=\"Course Name\">";
+        html += "<br><br><input type=\"text\" id=\"instructor\" placeholder=\"Instructor\">";
+        html += "<br><input type=\"text\" id=\"ta\" placeholder=\"TA\">";
+        html += "<br><br><input type=\"text\" id=\"location\" placeholder=\"Location\">";
+        html += "<br><input type=\"text\" id=\"start_date\"placeholder=\"First Class Date\">";
+        html += "<br><br><input type=\"text\" id=\"start_time\" placeholder=\"Start Time\"><br>";
+        html += "<input type=\"text\" id=\"end_time\" placeholder=\"End Time\"><br>";
+        html += "<br><select multiple id=\"days\" name=\"weekdays\"><option value=\"SUN\">Sunday</option><option value=\"MON\">Monday</option><option value=\"TUE\">Tuesday</option><option value=\"WED\">Wednesday</option><option value=\"THUR\">Thursday</option><option value=\"FRI\">Friday</option><option value=\"SAT\">Saturday</option></select>";
         html += "<button id=\"submit_class\">Create Class</button>";
 
     $("#main").html(html);
@@ -166,7 +161,7 @@ function createCourse() {
         var start = $("#start_date").val()+" "+$("#start_time").val();
         var end = $("#start_date").val()+" "+$("#end_time").val();
         console.log("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&start_time="+$("#start_time").val()+"&end_time="+$("#end_time").val());
-        $.get("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&start_time="+start+"&end_time="+end, function(data, status) {
+        $.get("createcourse.php?username="+localStorage["username"]+"&course_num="+$("#course_num").val()+"&course_name="+$("#course_name").val()+"&instructor="+$("#instructor").val()+"&ta="+$("#ta").val()+"&location="+$("#location").val()+"&start_time="+start+"&end_time="+end+"&days="+$("#days").val(), function(data, status) {
             console.log(data);
             var a = JSON.parse(data);
             viewCourse(a['course_id']);
@@ -201,7 +196,7 @@ function viewGroup(gid) {
         groupData += "<span><p>"+groupArray["course_num"]+" "+groupArray["course_name"]+"<p>";
         groupData += "<p>"+groupArray["description"]+"</p>";
         groupData += "<p>"+groupArray["location"]+"</p>";
-        groupData += "<p>"+groupArray["time"]+"</p></span></h1>";
+        groupData += "<p>"+groupArray["start_time"]+"</p></span></h1>";
         $("#gtitlespan").html(groupData);
     });
 
@@ -235,8 +230,10 @@ function createGroup() {
         html += "<h5>Time</h5>";
         html += "<input type=\"text\" id=\"time\"><br>";
         html += "<button id=\"submit_group\">Create Group</button>";
+        $("#main").html(html);
+        $('#time').datetimepicker({timeFormat: "hh:mm tt"});
 
-    $("#main").html(html);
+
     $("#submit_group").click(function() {
         console.log("creategroup.php?username="+localStorage["username"]+"&group_name="+$("#group_name").val()+"&course_id="+localStorage["currentCourse"]+"&location="+$("#location").val()+"&description="+$("#description").val()+"&time="+$("#time").val()+"&creator="+localStorage["username"]);
         $.get("creategroup.php?username="+localStorage["username"]+"&group_name="+$("#group_name").val()+"&course_id="+localStorage["currentCourse"]+"&location="+$("#location").val()+"&description="+$("#description").val()+"&time="+$("#time").val()+"&creator="+localStorage["username"], function(data, status) {

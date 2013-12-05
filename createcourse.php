@@ -15,6 +15,7 @@ if(mysqli_connect_errno($con)) {
 	$location = $_GET["location"];
 	$start_time = $_GET["start_time"];
 	$end_time = $_GET["end_time"];
+	$days = $_GET["days"];
 	//find if class exists
 	$content = mysqli_query($con, "SELECT *
 								   FROM COURSES
@@ -35,7 +36,7 @@ if(mysqli_connect_errno($con)) {
 		echo json_encode($result);
 	} else {
 
-		$SQL = "INSERT INTO COURSES (course_num, course_name, instructor, ta, location, start_time, end_time) VALUES ('$course_num', '$course_name', '$instructor', '$ta', '$location', '$start_time', '$end_time')";
+		$SQL = "INSERT INTO COURSES (course_num, course_name, instructor, ta, location, start_time, end_time, days) VALUES ('$course_num', '$course_name', '$instructor', '$ta', '$location', '$start_time', '$end_time', '$days')";
 		//echo $SQL;
 
 		$content = mysqli_query($con, $SQL);
