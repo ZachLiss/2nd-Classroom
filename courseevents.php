@@ -34,6 +34,17 @@ if(mysqli_connect_errno($con)) {
 			//push this array into the result
 			array_push($result, $arr);
 
+			$temp_start_date= strtotime('+2 day', $start_date);
+				$temp_end_date= strtotime('+2 day', $end_date);
+				$arr = array('id' => $row["course_id"],
+						 	 'title' => $row["course_name"],
+							 'start' => $temp_start_date,
+							 'end' => $temp_end_date,
+							 'allDay' => false
+							 );
+				//push this array into the result
+				array_push($result, $arr);
+
 			for ( $i = 1; $i<9; $i++){
 				$start_date= strtotime('+1 week', $start_date);
 				$end_date= strtotime('+1 week', $end_date);
@@ -46,6 +57,18 @@ if(mysqli_connect_errno($con)) {
 			
 				//push this array into the result
 				array_push($result, $arr);
+
+				$temp_start_date= strtotime('+2 day', $start_date);
+				$temp_end_date= strtotime('+2 day', $end_date);
+				$arr = array('id' => $row["course_id"],
+						 	 'title' => $row["course_name"],
+							 'start' => $temp_start_date,
+							 'end' => $temp_end_date,
+							 'allDay' => false
+							 );
+				//push this array into the result
+				array_push($result, $arr);
+
 			}
 		}
 

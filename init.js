@@ -228,15 +228,21 @@ function createGroup() {
         html += "<h5>Location</h5>";
         html += "<input type=\"text\" id=\"location\">";
         html += "<h5>Time</h5>";
-        html += "<input type=\"text\" id=\"time\"><br>";
+        html += "<br><input type=\"text\" id=\"start_date\"placeholder=\"Date\">";
+        html += "<br><br><input type=\"text\" id=\"start_time\" placeholder=\"Start Time\"><br>";
+        html += "<input type=\"text\" id=\"end_time\" placeholder=\"End Time\"><br>";
         html += "<button id=\"submit_group\">Create Group</button>";
         $("#main").html(html);
-        $('#time').datetimepicker({timeFormat: "hh:mm tt"});
+        $('#start_date').datepicker();
+        $('#start_time').timepicker({timeFormat: "hh:mm tt"});
+        $('#end_time').timepicker({timeFormat: "hh:mm tt"});
 
 
     $("#submit_group").click(function() {
+        var start = $("#start_date").val()+" "+$("#start_time").val();
+        var end = $("#start_date").val()+" "+$("#end_time").val();
         console.log("creategroup.php?username="+localStorage["username"]+"&group_name="+$("#group_name").val()+"&course_id="+localStorage["currentCourse"]+"&location="+$("#location").val()+"&description="+$("#description").val()+"&time="+$("#time").val()+"&creator="+localStorage["username"]);
-        $.get("creategroup.php?username="+localStorage["username"]+"&group_name="+$("#group_name").val()+"&course_id="+localStorage["currentCourse"]+"&location="+$("#location").val()+"&description="+$("#description").val()+"&time="+$("#time").val()+"&creator="+localStorage["username"], function(data, status) {
+        $.get("creategroup.php?username="+localStorage["username"]+"&group_name="+$("#group_name").val()+"&course_id="+localStorage["currentCourse"]+"&location="+$("#location").val()+"&description="+$("#description").val()+"&start_time="+start+"&end_time="+end+"&creator="+localStorage["username"], function(data, status) {
             console.log(data);
             var a = JSON.parse(data);
             viewGroup(a['group_id']);
@@ -565,8 +571,14 @@ function displayCalendar(){
 
         // your event source
         {
-            url: 'events.php', // use the `url` property
+            url: 'courseevents.php', // use the `url` property
             color: 'green',    // an option!
+            textColor: 'black'  // an option!
+        },
+
+        {
+            url: 'groupevents.php', // use the `url` property
+            color: 'red',    // an option!
             textColor: 'black'  // an option!
         }
 

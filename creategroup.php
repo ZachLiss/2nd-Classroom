@@ -13,7 +13,8 @@ if(mysqli_connect_errno($con)) {
 	$location = $_GET["location"];
 	$creator = $_GET["creator"];
 	$description = $_GET["description"];
-	$time = $_GET["time"];
+	$start = $_GET["start_time"];
+	$end = $_GET["end_time"];
 
 	// //check if group exists in course
 	// $content = mysqli_query($con, "SELECT *
@@ -26,7 +27,7 @@ if(mysqli_connect_errno($con)) {
 	// 	//echo "Group already exists in course $course_id";
 
 	// } else {
-		$SQL = "INSERT INTO GROUPS (group_name, course_id, creator, location, start_time, description) VALUES ('$group_name', $course_id, '$username', '$location', '$time', '$description')";
+		$SQL = "INSERT INTO GROUPS (group_name, course_id, creator, location, start_time, end_time, description) VALUES ('$group_name', $course_id, '$username', '$location', '$start', '$end', '$description')";
 		$content = mysqli_query($con, $SQL);
 
 		$content = mysqli_query($con, "Select group_id
