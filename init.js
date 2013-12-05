@@ -109,7 +109,7 @@ function setListeners() {
  ******************/
 
 function joinCourse(cid) {
-	console.log("joining course cid: "+cid);
+    console.log("joining course cid: "+cid);
     $.get("joincourse.php?cid="+cid+"&username="+localStorage["username"]);
     viewCourse(cid);
     userBarReload();
@@ -253,7 +253,7 @@ function createGroup() {
  ******************/
 
 function viewUser(username) {
-	$("#main").html("<span id='gtitlespan'></span>");
+    $("#main").html("<span id='gtitlespan'></span>");
     console.log(username);
     $.get("getuser.php?user="+username, function(data,status) {
         var userArray = JSON.parse(data);
@@ -341,10 +341,14 @@ function newNote (course_id) {
  ******************/
 
 function showThread(thread_id) {
-    $("#main").html("<div id = 'tspan'></div><div id = 'postspan'></div>");
-    console.log(thread_id + "this is it");
     
-    setInterval(function() {
+
+    clearInterval(localStorage["currentThreadLoop"]);
+
+    $("#main").html("<div id = 'tspan'></div><div id = 'postspan'></div>");
+    var interval;
+    
+    interval = setInterval(function() {
         var div = $("#tspan");
         var height = div[0].scrollHeight;
         div.scrollTop(height);
@@ -363,7 +367,13 @@ function showThread(thread_id) {
     
             $("#tspan").html(messageList);
         });
-    }, 1000);
+    }, 500);
+
+    localStorage["currentThreadLoop"] = interval;
+
+   
+    
+
     var postList = "";
     postList += "<h3>"
     postList += "<input type='text' size=\"100\" id =\"txt\">"
@@ -401,19 +411,19 @@ function SubmitThread(gid){
 }
 
 function loadThreads(gid) {
-	$.get("getthreads.php?group_id="+gid, function(data, status) {
-		console.log(data);
-		//parse data into an array
-		var threadArray = JSON.parse(data);
-		var threadList = "";
-		console.log(threadArray);
-		threadArray.forEach(function(thread) {
-			threadList += "<h3>Title: " + thread["title"] + "<br>";
-			threadList += "Subject: " + thread["subject"] + "<br>";
-			threadList += "<td><button class=\"show_thread small blue\" value=\""+thread["thread_id"]+"\">View Thread</button></td></tr></h3>";	
-		});
-		$("#threadspan").html(threadList);
-	});
+    $.get("getthreads.php?group_id="+gid, function(data, status) {
+        console.log(data);
+        //parse data into an array
+        var threadArray = JSON.parse(data);
+        var threadList = "";
+        console.log(threadArray);
+        threadArray.forEach(function(thread) {
+            threadList += "<h3>Title: " + thread["title"] + "<br>";
+            threadList += "Subject: " + thread["subject"] + "<br>";
+            threadList += "<td><button class=\"show_thread small blue\" value=\""+thread["thread_id"]+"\">View Thread</button></td></tr></h3>"; 
+        });
+        $("#threadspan").html(threadList);
+    });
 }
 
 /*******************
