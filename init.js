@@ -109,7 +109,7 @@ function setListeners() {
  ******************/
 
 function joinCourse(cid) {
-        console.log("joining course cid: "+cid);
+	console.log("joining course cid: "+cid);
     $.get("joincourse.php?cid="+cid+"&username="+localStorage["username"]);
     viewCourse(cid);
     userBarReload();
@@ -253,7 +253,7 @@ function createGroup() {
  ******************/
 
 function viewUser(username) {
-        $("#main").html("<span id='gtitlespan'></span>");
+	$("#main").html("<span id='gtitlespan'></span>");
     console.log(username);
     $.get("getuser.php?user="+username, function(data,status) {
         var userArray = JSON.parse(data);
@@ -399,19 +399,19 @@ function SubmitThread(gid){
 }
 
 function loadThreads(gid) {
-        $.get("getthreads.php?group_id="+gid, function(data, status) {
-                console.log(data);
-                //parse data into an array
-                var threadArray = JSON.parse(data);
-                var threadList = "";
-                console.log(threadArray);
-                threadArray.forEach(function(thread) {
-                        threadList += "<h3>Title: " + thread["title"] + "<br>";
-                        threadList += "Subject: " + thread["subject"] + "<br>";
-                        threadList += "<td><button class=\"show_thread small blue\" value=\""+thread["thread_id"]+"\">View Thread</button></td></tr></h3>";        
-                });
-                $("#threadspan").html(threadList);
-        });
+	$.get("getthreads.php?group_id="+gid, function(data, status) {
+		console.log(data);
+		//parse data into an array
+		var threadArray = JSON.parse(data);
+		var threadList = "";
+		console.log(threadArray);
+		threadArray.forEach(function(thread) {
+			threadList += "<h3>Title: " + thread["title"] + "<br>";
+			threadList += "Subject: " + thread["subject"] + "<br>";
+			threadList += "<td><button class=\"show_thread small blue\" value=\""+thread["thread_id"]+"\">View Thread</button></td></tr></h3>";	
+		});
+		$("#threadspan").html(threadList);
+	});
 }
 
 /*******************
