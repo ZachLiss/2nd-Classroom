@@ -31,7 +31,7 @@ if(mysqli_connect_errno($con)) {
 				echo "<tr>";
 				echo "<td>$row[group_name]</td>";
 				echo "<td>$row[location]</td>";
-				echo "<td>$row[time]</td>";
+				echo "<td>$row[start_time]</td>";
 				echo "<td>$row[creator]</td>";
 				echo "<td><button class=\"join_group  small blue\" value=\"$row[group_id]\">Join Group</button></td>";
 				echo "</tr>";
@@ -40,7 +40,7 @@ if(mysqli_connect_errno($con)) {
 				echo "<tr>";
 				echo "<td>$row[group_name]</td>";
 				echo "<td>$row[location]</td>";
-				echo "<td>$row[time]</td>";
+				echo "<td>$row[start_time]</td>";
 				echo "<td>$row[creator]</td>";
 				echo "<td><button class=\"view_group small blue\" value=\"$row[group_id]\">View Group</button></td>";
 				echo "</tr>";

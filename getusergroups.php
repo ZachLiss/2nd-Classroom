@@ -35,7 +35,7 @@ if(mysqli_connect_errno($con)) {
 		 				//'course_name' => $row["course_name"],
 		 				'description' => $row["description"], 
 		 				'location' => $row["location"], 
-		 				'time' => $row["time"],
+		 				'time' => $row["start_time"],
 		 				'in_group' => "false");
 			} else {
 				//student is in the group
@@ -45,7 +45,7 @@ if(mysqli_connect_errno($con)) {
 		 				//'course_name' => $row["course_name"],
 		 				'description' => $row["description"], 
 		 				'location' => $row["location"], 
-		 				'time' => $row["time"],
+		 				'time' => $row["start_time"],
 		 				'in_group' => "true");
 			}
 

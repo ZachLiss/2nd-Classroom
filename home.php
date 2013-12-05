@@ -14,18 +14,22 @@ require_once('functions.php')
     <link rel="stylesheet" href="css/timepicker.css"  type="text/css" media="all">
 	<script src="js/kickstart.js"></script>
     <script src="init.js"></script>
-	<script src="header.js"></script>
     <link rel="stylesheet" href="http://arshaw.com/js/fullcalendar-1.6.1/fullcalendar/fullcalendar.css" type="text/css">
     <script src="http://arshaw.com/js/fullcalendar-1.6.1/fullcalendar/fullcalendar.min.js"></script>
     <link rel="stylesheet" href="style.css"  type="text/css" media="all">
     <script src="js/timepicker.js"></script>
 	<script>
 	$(document).ready(function(){
-	   localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
-        //get the list of courses for the user
+        localStorage["username"] = '<?php echo $_SESSION['username']; ?>';
+        setListeners();  
         userBarReload();
-        setNavigation();
         displayCalendar();
+        
+        $("#search_txt").keyup(function() {
+            $.get("getresults.php?q="+$(this).val()+"&username="+localStorage["username"], function(data, status) {
+                $("#results").html(data);
+            });
+        });  
     });
 
 	</script>
