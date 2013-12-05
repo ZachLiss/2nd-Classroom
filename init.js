@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     setListeners();	
 
@@ -134,7 +133,7 @@ function viewGroup(gid) {
     newSpanList += "<td><button class=\"new_thread small blue\" value=\""+gid+"\">Create New Thread</button></td></tr><hr>";
     $("#newtspan").html(newSpanList);
 
-    loadThreads();
+    loadThreads(gid);
 }
 
 
@@ -264,7 +263,7 @@ function NewThread(){
     threadEntry += "<input type=\"text\" id=\"sub\"/><br>"
     threadEntry += "<button class=\"Submit_Thread\">Add Thread</button></h3>"
     $("#newtspan").html(threadEntry);
-    loadThreads();
+    loadThreads(gid);
 }
 
 function SubmitThread(gid){
@@ -274,7 +273,7 @@ function SubmitThread(gid){
     SpanList += "<td><button class=\"new_thread small blue\" value=\""+gid+"\">Create New Thread</button></td></tr><hr>";
     $("#newtspan").html(SpanList);
 }
-function loadThreads() {
+function loadThreads(gid) {
             $.get("getthreads.php?group_id="+gid, function(data, status) {
             console.log(data);
             //parse data into an array
